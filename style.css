@@ -94,6 +94,13 @@ header[class*="page-header"] p {
   border-left: 1px solid rgb(var(--gray-800));
 }
 
+/* Willow reverses the rail (flex-row-reverse), pinning the TOC block to the
+   right edge. With the divider now on the rail's left edge, that leaves a wide
+   gap — un-reverse it so the block sits against the divider. */
+#table-of-contents-layout {
+  flex-direction: row !important;
+}
+
 /* Left-align the table of contents. Willow stacks it flush-right
    (items-end / text-right), so wrapped multi-line entries read raggedly; the
    app's section labels are left-aligned. */
