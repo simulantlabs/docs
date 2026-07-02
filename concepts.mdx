@@ -1,0 +1,61 @@
+---
+title: "Core concepts"
+description: "The building blocks of Simulant — workspaces, datasets, cohorts, creatives, tests, and focus groups — and how they fit together."
+keywords: ["concepts", "cohort", "test", "focus group", "creative", "dataset", "workspace"]
+---
+
+Simulant has a small set of objects that build on each other. Understanding how they relate makes everything else in these docs straightforward.
+
+<Frame caption="A live focus group room brings the object model together — a cohort's participants reacting to a creative, with sentiment and themes forming in real time.">
+  <img src="/images/app/focus-group-room.png" alt="A focus group room where a voter cohort reacts to a campaign creative" />
+</Frame>
+
+## The object model
+
+<Steps>
+  <Step title="Datasets ground the population">
+    A **dataset** is a source of real-world signal — census figures, electoral studies, panels, or your own uploaded data. Personas are built from datasets, so every response can be traced back to evidence.
+  </Step>
+  <Step title="Cohorts define who you're reaching">
+    A **cohort** is a defined audience drawn from your datasets and narrowed with demographic filters and psychographic tags. It has a sample size (`n`).
+  </Step>
+  <Step title="Creatives are what you put in front of them">
+    A **creative** is the thing being reacted to — a video, an image, or a block of copy.
+  </Step>
+  <Step title="Tests and focus groups collect the reaction">
+    A **test** runs a structured study across the whole cohort. A **focus group** convenes a small room from the cohort to deliberate in conversation.
+  </Step>
+</Steps>
+
+## Objects at a glance
+
+| Object | What it is | Where it lives |
+|--------|------------|----------------|
+| **Workspace** | The shared space for your team's work, data, and billing | Workspace switcher, top-left |
+| **Dataset** | A source of grounding data, versioned with a schema | **Datasets** |
+| **Cohort** | A defined, sampled audience | **Cohorts** |
+| **Creative** | A media asset or copy to test | **Creatives** |
+| **Test** | A structured study run across a cohort | **Tests** |
+| **Focus group** | A convened room that deliberates | **Focus groups** |
+| **Insight** | A pattern surfaced across many tests | **Insights** |
+
+## Workspaces
+
+Everything you create belongs to a **workspace**. A workspace has its own datasets, cohorts, tests, members, plan, and billing. You can belong to more than one and switch between them with the switcher in the top-left of the sidebar. See [Members and roles](/workspace/members).
+
+## Quantitative and qualitative, together
+
+Every test returns both kinds of feedback:
+
+- **Quantitative** — structured measures such as recall, sentiment, purchase intent, and clarity, scored out of 100 and cut by segment.
+- **Qualitative** — open-ended **verbatims** (what individual personas said and why), clustered into **themes**, with **recommendations** distilled on top.
+
+A [focus group](/guides/focus-groups) adds a third mode: watching a room reason and shift its position live.
+
+## Grounding
+
+Simulant models outcomes, not opinions. Personas are built from the measurable record, and every result traces back to the signals behind it — so the read-out survives the room, the audit, and the front page. See [How grounding works](/data/grounding).
+
+<Card title="Ready to build?" icon="rocket" href="/guides/cohorts">
+  Start by building the cohort you want to reach.
+</Card>

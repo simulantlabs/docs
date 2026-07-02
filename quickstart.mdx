@@ -1,47 +1,75 @@
 ---
 title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+description: "Create a workspace, build a cohort, and run your first test in under an hour."
+keywords: ["quickstart", "getting started", "first test", "onboarding"]
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+This guide takes you from an empty workspace to your first test result. It should take about an hour, most of which is the simulation running.
 
 ## Prerequisites
 
-Before you begin, you must have:
+- Access to Simulant at [app.simulant.tech](https://app.simulant.tech). If you don't have an account, [book a demo](https://simulant.tech/contact?intent=demo) or accept a workspace invite.
+- A creative to test — a video, an image, or a block of copy. You can also start with messaging typed directly into the app.
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+## Set up your workspace
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
-
-    ```bash
-    npm install your-package
-    ```
+  <Step title="Create your account">
+    Sign up at [app.simulant.tech/signup](https://app.simulant.tech/signup) with your work email, then enter the 6-digit code we send you. If you were invited to a workspace, open the invite link instead and accept.
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
-
-    ```bash
-    your-cli init
-    ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
-
-    ```bash
-    your-cli start
-    ```
+  <Step title="Complete onboarding">
+    Tell us your name, role, organization, and what you plan to use Simulant for. This creates your first **workspace** — the shared space where your team's cohorts, tests, and data live.
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## Run your first test
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
+<Steps>
+  <Step title="Add data (optional)">
+    Simulant ships with a **public library** of grounding datasets, so you can start immediately. To add your own signal, go to **Datasets → Add dataset**. See [Datasets](/data/datasets).
+  </Step>
+  <Step title="Build a cohort">
+    Go to **Cohorts → New cohort**. Name it, choose the source data it's built from, then narrow it with demographic filters and psychographic tags. Simulant shows the sample size (`n`) as you refine. See [Build a cohort](/guides/cohorts).
+  </Step>
+  <Step title="Add your creative">
+    Go to **Creatives → Upload creative** and drop in your video or image. For copy tests, you can skip this and type the messaging directly into the test builder. See [Creatives](/guides/creatives).
+  </Step>
+  <Step title="Create the test">
+    Go to **Tests → New test**. Give it a name and a **hypothesis**, choose the format (Video, Image, or Messaging), add your variants, pick the cohort, and select the metrics and questions you want answered. See [Run a test](/guides/tests).
+  </Step>
+  <Step title="Run it">
+    Click **Run test**. Simulant questions the population and assembles the results. You'll get a notification when the run finishes.
+  </Step>
+  <Step title="Read the results">
+    Open the test to see headline metrics (recall, sentiment, intent, clarity), sentiment by segment, and tabs for **Verbatims**, **Themes**, and **Recommendations**. Use **Export** or **Share** to bring others in.
+
+    <Frame caption="Your first result — headline metrics, sentiment by segment, and the verbatims behind the numbers.">
+      <img src="/images/app/test-results.png" alt="Test results page showing metrics, segment sentiment, and voter verbatims" />
+    </Frame>
+  </Step>
+</Steps>
+
+<Check>
+  You've run your first simulation. Next, try convening a [focus group](/guides/focus-groups) from the same cohort to hear the room deliberate.
+</Check>
+
+## Where to go next
+
+<CardGroup cols={2}>
+  <Card title="Core concepts" icon="shapes" href="/concepts">
+    Understand cohorts, tests, and focus groups.
+  </Card>
+  <Card title="Research agent" icon="sparkles" href="/guides/agent">
+    Ask questions of your simulation in plain language.
+  </Card>
+  <Card title="Invite your team" icon="users" href="/workspace/members">
+    Add teammates and set roles.
+  </Card>
+  <Card title="Compare and track" icon="chart-line" href="/guides/insights">
+    Find patterns across every test you run.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Need help? Reach out at [support@simulant.tech](mailto:support@simulant.tech).
 </Tip>

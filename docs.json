@@ -1,33 +1,84 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Documentation — Simulant",
+  "theme": "willow",
+  "name": "Simulant Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#f9700e",
+    "light": "#fb8a3c",
+    "dark": "#e0630b"
+  },
+  "appearance": {
+    "default": "dark",
+    "strict": true
+  },
+  "background": {
+    "color": {
+      "light": "#ffffff",
+      "dark": "#0a0a0a"
+    }
+  },
+  "fonts": {
+    "heading": {
+      "family": "Instrument Serif",
+      "weight": 400
+    },
+    "body": {
+      "family": "Inter Tight"
+    }
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "pages": [
+    "groups": [
       {
-        "group": "Getting Started",
+        "group": "Getting started",
         "pages": [
           "index",
-          "quickstart"
+          "quickstart",
+          "concepts"
+        ]
+      },
+      {
+        "group": "Build and run",
+        "pages": [
+          "guides/cohorts",
+          "guides/creatives",
+          "guides/tests",
+          "guides/focus-groups"
+        ]
+      },
+      {
+        "group": "Analyze",
+        "pages": [
+          "guides/insights",
+          "guides/agent"
+        ]
+      },
+      {
+        "group": "Data",
+        "pages": [
+          "data/datasets",
+          "data/grounding"
+        ]
+      },
+      {
+        "group": "Workspace",
+        "pages": [
+          "workspace/members",
+          "workspace/billing",
+          "workspace/api"
         ]
       }
     ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Website",
+          "href": "https://simulant.tech",
+          "icon": "globe"
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://simulant.tech/blog",
           "icon": "newspaper"
         }
       ]
@@ -42,13 +93,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@simulant.tech"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Go to app",
+      "href": "https://app.simulant.tech"
     }
   },
   "contextual": {
@@ -62,13 +113,6 @@
       "cursor",
       "vscode"
     ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
   },
   "description": "Simulant simulates human behaviour so you can make more informed policy and business decisions."
 }

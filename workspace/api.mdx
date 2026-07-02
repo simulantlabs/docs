@@ -1,0 +1,41 @@
+---
+title: "API access"
+description: "Create an API key and drive Simulant programmatically."
+keywords: ["api", "api key", "programmatic", "integration", "authentication"]
+---
+
+Simulant offers **programmatic access** so you can create cohorts, run tests, and pull results from your own systems. API access is available on the **Pro plan**. See [Plans and billing](/workspace/billing).
+
+## Get an API key
+
+Go to **Settings → API** to view your workspace's key. From here you can **copy** the key or **rotate** it if it's ever exposed.
+
+<Frame caption="Settings → API — your workspace key and a ready-to-run example request.">
+  <img src="/images/app/settings-api.png" alt="API settings showing the workspace API key and a curl example" />
+</Frame>
+
+<Warning>
+  Treat your API key like a password. It carries the permissions of your workspace — never commit it to source control or expose it in client-side code. Rotate immediately if it leaks.
+</Warning>
+
+## Authenticate
+
+Pass your key as a bearer token on every request:
+
+```bash
+curl https://api.simulant.tech/v1/tests \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+## What you can do
+
+The API mirrors the objects you work with in the app — [cohorts](/guides/cohorts), [tests](/guides/tests), and [focus groups](/guides/focus-groups) — so you can:
+
+- Kick off a test or cohort run from a pipeline.
+- Poll a run's status and fetch results when it completes.
+- Export verbatims and metrics into your own reporting.
+
+<Note>
+  Building an integration and need the full endpoint reference? Contact [support@simulant.tech](mailto:support@simulant.tech) and we'll get you set up.
+</Note>

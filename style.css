@@ -1,0 +1,236 @@
+/*
+ * Simulant docs — "Grapevine" theme bridge.
+ *
+ * Aligns the Mintlify (willow) docs with the Simulant app design system:
+ * neutral near-black surfaces, hairline dividing lines, sharp corners,
+ * and JetBrains Mono uppercase labels. The app tokens live in
+ * app/src/styles.css; the values below mirror them.
+ */
+
+/* JetBrains Mono — the app's mono face for labels, code, and eyebrows. */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ------------------------------------------------------------------ *
+ * 1. Neutralize the gray ramp.
+ *    Willow ships a warm (brown-tinted) gray scale that drives every
+ *    border and surface. The app is strictly neutral (chroma 0), so we
+ *    replace the ramp with pure greys at matched luminance.
+ * ------------------------------------------------------------------ */
+:root,
+.dark {
+  --gray-50: 250 250 250;
+  --gray-100: 244 244 244;
+  --gray-200: 229 229 229;
+  --gray-300: 212 212 212;
+  --gray-400: 161 161 161;
+  --gray-500: 133 133 133; /* app --muted-foreground ≈ #868686 */
+  --gray-600: 82 82 82;
+  --gray-700: 60 60 60;
+  --gray-800: 38 38 38;    /* hairline / default border → #262626 */
+  --gray-900: 23 23 23;    /* card / raised surface → #171717 */
+  --gray-950: 15 15 15;
+}
+
+/* ------------------------------------------------------------------ *
+ * 2. Mono labels.
+ *    Route willow's mono usages (code, eyebrow, kbd) through JetBrains
+ *    Mono to match the app's label-mono utility.
+ * ------------------------------------------------------------------ */
+code,
+kbd,
+samp,
+pre,
+pre code,
+.eyebrow,
+[class*="font-family-mono"] {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 3. Eyebrow — muted, left-aligned, letter-spaced (app label-mono).
+ *    Willow renders it centered in the primary color; the app uses a
+ *    muted grey uppercase tracked label.
+ * ------------------------------------------------------------------ */
+.eyebrow {
+  color: rgb(var(--gray-500)) !important;
+  text-align: left !important;
+  letter-spacing: 0.08em !important;
+  font-size: 0.6875rem !important;
+}
+
+/* Left-align the page header block to mirror the app's layout. */
+header[class*="page-header"] h1,
+header[class*="page-header"] p {
+  text-align: left !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 4. Structural dividing lines.
+ *    The app's signature: a vertical hairline between the nav and the
+ *    content, and a hairline under the top bar.
+ * ------------------------------------------------------------------ */
+#sidebar {
+  border-right: 1px solid rgb(var(--gray-800));
+}
+
+/* Top bar only (not the in-page header). */
+#navbar {
+  min-height: 4rem;
+  border-bottom: 1px solid rgb(var(--gray-800));
+  background-color: rgb(var(--background-dark)) !important;
+}
+
+/* Willow paints the main content column with a raised gray surface
+   (dark:bg-gray-900). The app keeps it flush black — make it transparent. */
+[class*="max-w-[844px]"] {
+  background-color: transparent !important;
+}
+
+/* Hairline down the left of the table of contents, echoing the app's
+   right-hand detail panels. */
+#table-of-contents,
+#toc {
+  border-left: 1px solid rgb(var(--gray-800));
+  padding-left: 1.25rem;
+}
+
+/* The taller top bar removed the gap the sidebar/TOC had below it.
+   Restore a little breathing room so the first items don't hug the
+   divider. */
+#sidebar-content {
+  margin-top: 1rem;
+}
+
+#table-of-contents,
+#toc {
+  padding-top: 1rem;
+}
+
+/* ------------------------------------------------------------------ *
+ * 5. Cards — flat, hairline-bordered, orange hover accent.
+ * ------------------------------------------------------------------ */
+.card {
+  background-color: rgb(var(--background-dark)) !important;
+  border-color: rgb(var(--gray-800)) !important;
+  box-shadow: none !important;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+/* Give card groups room to breathe from preceding content (e.g. a Frame
+   sits flush against them otherwise). Margins collapse, so this won't
+   double up when a heading precedes the group. */
+#content-area .columns {
+  margin-top: 2rem;
+}
+
+.card:hover {
+  border-color: rgb(var(--primary)) !important;
+  background-color: rgb(var(--gray-900)) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 6. Callouts — flat neutral panels (the app is single-accent).
+ *    Every callout gets a neutral surface and hairline border; the icon
+ *    keeps its semantic hue. Note/Info trades blue for the brand orange.
+ * ------------------------------------------------------------------ */
+.callout {
+  background-color: rgb(var(--gray-900)) !important;
+  border-color: rgb(var(--gray-800)) !important;
+}
+
+/* Willow tints the callout body text by type (green Tip, blue Note, …).
+   Normalize it to one neutral tone so callouts read consistently. */
+.callout p,
+.callout li,
+.callout .prose {
+  color: rgb(var(--gray-300)) !important;
+}
+
+/* Informational icons (Note/Info/Tip/Check) take the brand accent;
+   Warning (amber) and Danger (red) keep their semantic hue. */
+.callout[class*="blue"] svg,
+.callout[class*="green"] svg,
+.callout[class*="emerald"] svg {
+  color: rgb(var(--primary)) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 7. Tables — hairline grid like the app's data views.
+ * ------------------------------------------------------------------ */
+table th,
+table td {
+  border-color: rgb(var(--gray-800)) !important;
+}
+
+/* Inline code — subtle neutral chip. */
+:not(pre) > code {
+  background-color: rgb(var(--gray-900)) !important;
+  border: 1px solid rgb(var(--gray-800)) !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 8. Footer — breathing room for the social icons and "Powered by".
+ * ------------------------------------------------------------------ */
+footer {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 9. Top bar + wordmark — match the marketing header's proportions.
+ *    Marketing: 64px bar (h-16) with a ~24px serif wordmark, so the mark
+ *    sits with generous breathing room. Willow ships a 48px bar, which
+ *    made the enlarged wordmark feel cramped. Grow the bar to 64px and
+ *    size the mark to ~24px for the same ratio.
+ * ------------------------------------------------------------------ */
+/* Center the content row within the taller bar (willow anchors it to the
+   original 48px height, leaving it stuck at the top). Use a column flex so
+   the inner row keeps its full-width left/right layout. */
+#navbar > div.mx-auto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 4rem;
+}
+
+.nav-logo {
+  height: 1.625rem !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 10. Body links — foreground text with a brand-orange underline,
+ *     matching the marketing site's link treatment.
+ * ------------------------------------------------------------------ */
+#content-area a.link {
+  text-decoration-line: underline;
+  text-decoration-color: rgb(var(--primary));
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+#content-area a.link:hover {
+  color: rgb(var(--primary));
+}
+
+/* ------------------------------------------------------------------ *
+ * 11. Text selection — brand accent, like the app.
+ * ------------------------------------------------------------------ */
+::selection {
+  background-color: rgb(var(--primary));
+  color: rgb(var(--background-dark));
+}
+
+/* ------------------------------------------------------------------ *
+ * 12. Remove the decorative grid overlay behind framed images.
+ * ------------------------------------------------------------------ */
+[class*="bg-grid"] {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------------ *
+ * 13. Hide the "Powered by Mintlify" footer badge.
+ * ------------------------------------------------------------------ */
+a[href*="utm_campaign=poweredBy"] {
+  display: none !important;
+}
+

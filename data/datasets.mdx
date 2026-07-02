@@ -1,0 +1,59 @@
+---
+title: "Datasets"
+description: "Add, connect, and manage the data that grounds your simulated population."
+keywords: ["dataset", "data source", "upload", "public library", "schema"]
+---
+
+A **dataset** is a source of real-world signal that grounds the personas in your workspace. Simulant ships with a public library so you can start immediately, and you can add your own data to sharpen the population around your market.
+
+<Frame caption="The Datasets view — workspace sources and the public library, with records and how each dataset feeds cohorts and tests.">
+  <img src="/images/app/datasets.png" alt="Datasets view showing a campaign's voter file, tracking poll, and public sources like the census" />
+</Frame>
+
+## The public library
+
+Every workspace can draw on Simulant's **public library** — a curated set of official, high-quality datasets covering population, attitudes, and behavior. Browse it under **Datasets → Add dataset → Public library**, then add a dataset to your workspace to make it available to cohorts. See [How grounding works](/data/grounding) for what's included.
+
+## Add your own data
+
+Go to **Datasets → Add dataset** and choose a source:
+
+<Steps>
+  <Step title="Upload a file">
+    Drop in a file to import — for example, a brand tracker or a survey export. Simulant reads the schema so you can confirm the fields and preview sample rows.
+  </Step>
+  <Step title="Connect a source">
+    Point Simulant at an API endpoint and provide an authorization token to pull records from an external system.
+  </Step>
+  <Step title="Add from the library">
+    Pick a dataset from the public library to add to your workspace.
+  </Step>
+</Steps>
+
+<Steps>
+  <Step title="Describe the dataset">
+    Give it a name (for example, `Q2 Brand Tracker`), a description of what it contains and how it should be used, a category, and tags.
+  </Step>
+  <Step title="Set access">
+    Choose who in the workspace can use it.
+  </Step>
+  <Step title="Add to workspace">
+    Confirm, and Simulant imports and prepares the data.
+  </Step>
+</Steps>
+
+## Schema, versions, and preview
+
+Open any dataset to inspect its **schema** (the fields and their types), browse **sample rows**, and see its details. Datasets are **versioned** — when you re-import or update a source, Simulant keeps the version history so results stay reproducible and you can see exactly what a run was built on.
+
+## Using datasets in cohorts
+
+Datasets don't shape a study on their own — you select which ones a [cohort](/guides/cohorts) is built from under **Source data**. Toggling a source on or off changes the signal behind that cohort's personas.
+
+<Note>
+  Your uploaded and connected datasets stay private to your workspace. Public library datasets are shared grounding available to everyone.
+</Note>
+
+<Card title="How grounding works" icon="database" href="/data/grounding">
+  Understand how datasets become a population.
+</Card>

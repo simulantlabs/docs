@@ -1,0 +1,113 @@
+---
+title: "Run a test"
+description: "Test creative and messaging at population scale — set up variants, audience, context, metrics, and questions, then read the results."
+keywords: ["test", "ab test", "creative testing", "message testing", "results", "verbatims"]
+---
+
+A **test** runs a structured study across a whole cohort. Use it to pre-test creative, compare messages, or rehearse a launch — and get both the numbers and the reasoning behind them.
+
+<Frame caption="The Tests list — every study with its format, headline sentiment, and status at a glance.">
+  <img src="/images/app/tests-list.png" alt="Tests list showing campaign message tests with sentiment scores and statuses" />
+</Frame>
+
+## Build a test
+
+Go to **Tests → New test**. The builder is organized into sections; work down the form and use the live panel to preview your setup.
+
+<Frame caption="The test builder — identity, creative, variants, and audience on the left with a live preview and estimate on the right.">
+  <img src="/images/app/test-builder.png" alt="Test builder for a cost-of-living TV spot with variants A and B and a Young Voters cohort selected" />
+</Frame>
+
+### Identity
+
+Name the test and state a **hypothesis** — what you expect to happen and why. Stating it up front keeps the read-out honest and gives you something to check the result against.
+
+### Creative
+
+Choose the format:
+
+- **Video** — react to a video cut.
+- **Image** — react to a static asset.
+- **Messaging** — react to copy you type or upload.
+
+Add **variants** to compare options side by side — up to four, labelled A through D. Attach a creative or message to each. See [Creatives](/guides/creatives).
+
+### Audience
+
+Pick the **cohort** the test runs against, or create a new one inline. Every variant is shown to the same audience, so differences in the result come from the creative, not the crowd. See [Build a cohort](/guides/cohorts).
+
+### Context
+
+Set the real-world environment the population is reacting within:
+
+- **Current** — today's prevailing issues, mood, and events.
+- **Neutral** — strip out context for a clean baseline.
+- **Custom** — specify the **issues**, **mood**, **events**, and **competitive** pressure yourself.
+
+Context is saved with the test so a run can be reconstructed and validated later.
+
+### Metrics
+
+Select the quantitative measures you want scored, such as **Recall**, **Sentiment**, and **Purchase intent**. Each is reported out of 100 and can be cut by segment.
+
+### Questions
+
+Add the questions each persona answers. Question types include:
+
+- **Open-ended** — free-text responses that become verbatims.
+- **Rating 1–5** — a numeric scale.
+- **Multiple choice** — fixed options you define.
+
+Drag to reorder questions. A good test mixes a few open-ended prompts with structured ratings.
+
+### Panel and behavior
+
+Tune how the run executes:
+
+- **Sample size** — how many personas to draw from the cohort (capped at the cohort's `n`), or **Max**.
+- **Randomize** — vary the order variants are shown to reduce order bias.
+- **Attention checks** — include checks that keep responses honest.
+- **Agent behavior** — toggles such as allowing **refusals**, requiring **grounded** answers, capturing **verbatims**, and probing with **adversarial** follow-ups.
+
+## Run it
+
+Click **Run test**. Simulant questions the population and assembles the results; you'll be notified when the run finishes. You can also **Save draft** to come back later.
+
+<Note>
+  Run time scales with sample size, number of variants, and question count. Larger panels take longer but tighten the confidence of the quantitative measures.
+</Note>
+
+## Read the results
+
+Open a finished test to see:
+
+- **Headline metrics** — recall, sentiment, intent, and clarity, each scored out of 100 against a benchmark.
+- **Sentiment by segment** — where the creative resonates and where it falls flat, split positive / neutral / negative.
+- **Verbatims** — what individual personas said, filterable by tone. Read the reasoning, not just the score.
+- **Themes** — verbatims clustered into the patterns that recur across the panel.
+- **Recommendations** — the actions the result points to.
+
+<Frame caption="Test results — headline metrics, sentiment by segment, and verbatims you can filter by tone.">
+  <img src="/images/app/test-results.png" alt="Test results for the cost-of-living spot showing recall, sentiment, intent, clarity, segment breakdown, and voter verbatims" />
+</Frame>
+
+<Frame caption="The Themes tab clusters verbatims into the patterns that recur across the panel.">
+  <img src="/images/app/test-themes.png" alt="Themes view showing recurring patterns such as cost-of-living resonance and doubts about funding" />
+</Frame>
+
+Use **Share** to bring in teammates or **Export** to take the results into a deck or report.
+
+<Tip>
+  Comparing variants? Look past the headline number to the segment cuts and themes — a variant that wins overall can still lose the audience you actually care about.
+</Tip>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Run a focus group" icon="messages-square" href="/guides/focus-groups">
+    Hear the same cohort deliberate in conversation.
+  </Card>
+  <Card title="Compare and track" icon="chart-line" href="/guides/insights">
+    Find patterns across every test you run.
+  </Card>
+</CardGroup>
