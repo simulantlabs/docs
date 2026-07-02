@@ -73,11 +73,15 @@ header[class*="page-header"] p {
   border-right: 1px solid rgb(var(--gray-800));
 }
 
-/* Top bar only (not the in-page header). */
+/* Top bar only (not the in-page header). Translucent + blurred, matching the
+   marketing header (bg-background/80 backdrop-blur) so content scrolls softly
+   beneath it. */
 #navbar {
   min-height: 4rem;
   border-bottom: 1px solid rgb(var(--gray-800));
-  background-color: rgb(var(--background-dark)) !important;
+  background-color: rgb(var(--background-dark) / 0.8) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Willow paints the main content column with a raised gray surface
