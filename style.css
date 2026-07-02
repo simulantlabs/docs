@@ -86,12 +86,28 @@ header[class*="page-header"] p {
   background-color: transparent !important;
 }
 
-/* Hairline down the left of the table of contents, echoing the app's
-   right-hand detail panels. */
+/* Hairline down the left of the right-hand rail. Hang it on the full-height
+   column (#content-side-layout) rather than the TOC content, so the divider
+   runs to the bottom of the page — mirroring the sidebar's right border and
+   the app's full-height grid rules. */
+#content-side-layout {
+  border-left: 1px solid rgb(var(--gray-800));
+}
+
+/* Left-align the table of contents. Willow stacks it flush-right
+   (items-end / text-right), so wrapped multi-line entries read raggedly; the
+   app's section labels are left-aligned. */
 #table-of-contents,
 #toc {
-  border-left: 1px solid rgb(var(--gray-800));
+  align-items: flex-start !important;
+  text-align: left !important;
   padding-left: 1.25rem;
+}
+
+#table-of-contents a,
+#toc a {
+  text-align: left !important;
+  justify-content: flex-start !important;
 }
 
 /* The taller top bar removed the gap the sidebar/TOC had below it.
