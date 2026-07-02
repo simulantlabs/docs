@@ -114,5 +114,11 @@
       "vscode"
     ]
   },
-  "description": "Simulant simulates human behaviour so you can make more informed policy and business decisions."
+  "description": "Simulant simulates human behaviour so you can make more informed policy and business decisions.",
+  "integrations": {
+    "posthog": {
+      "apiKey": "phc_qzykUcV8s5SeePatcERQwJry78vMGRZywgm3KkGgXVbk",
+      "sessionRecording": true
+    }
+  }
 }
