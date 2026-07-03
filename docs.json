@@ -57,6 +57,7 @@
         "group": "Data",
         "pages": [
           "data/datasets",
+          "data/feeds",
           "data/grounding"
         ]
       },

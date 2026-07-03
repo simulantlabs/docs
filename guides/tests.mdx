@@ -44,7 +44,9 @@ Set the real-world environment the population is reacting within:
 - **Neutral** — strip out context for a clean baseline.
 - **Custom** — specify the **issues**, **mood**, **events**, and **competitive** pressure yourself.
 
-Context is saved with the test so a run can be reconstructed and validated later.
+Under **Custom** you can also attach up to four **news articles** from a [feed](/data/feeds). The selected articles are passed to every persona so their reactions reflect what your audience has actually been reading this week.
+
+Context is saved with the test so a run can be reconstructed and validated later, even after the news cycle has moved on.
 
 ### Metrics
 
@@ -71,7 +73,9 @@ Tune how the run executes:
 
 ## Run it
 
-Click **Run test**. Simulant questions the population and assembles the results; you'll be notified when the run finishes. You can also **Save draft** to come back later.
+Before you launch, the builder shows an **estimate** — the number of LLM calls the run will make (panel size × variants), an approximate runtime, the count of verbatims to expect, and the credits it will consume. Use it to right-size a run before committing to it.
+
+Click **Run test**. Simulant questions every persona in the filtered panel and streams live per-persona progress into the results page as answers come back; you'll be notified when the run finishes. You can also **Save draft** to come back later.
 
 <Note>
   Run time scales with sample size, number of variants, and question count. Larger panels take longer but tighten the confidence of the quantitative measures.
@@ -82,10 +86,15 @@ Click **Run test**. Simulant questions the population and assembles the results;
 Open a finished test to see:
 
 - **Headline metrics** — recall, sentiment, intent, and clarity, each scored out of 100 against a benchmark.
+- **Confidence panel** — completion rate, effective sample size, paired-persona counts per variant, and the weighting basis behind the numbers, so you can judge how much to lean on a result.
 - **Sentiment by segment** — where the creative resonates and where it falls flat, split positive / neutral / negative.
 - **Verbatims** — what individual personas said, filterable by tone. Read the reasoning, not just the score.
 - **Themes** — verbatims clustered into the patterns that recur across the panel.
 - **Recommendations** — the actions the result points to.
+
+<Note>
+  Simulant scores tests with real persona reactions across the whole filtered panel — every persona answers, and the metrics are weighted from those individual responses. If a run couldn't reach the panel (for example, an upstream outage), the result falls back to an estimated score and is flagged as such in the confidence panel.
+</Note>
 
 <Frame caption="Test results — headline metrics, sentiment by segment, and verbatims you can filter by tone.">
   <img src="/images/app/test-results.png" alt="Test results for the cost-of-living spot showing recall, sentiment, intent, clarity, segment breakdown, and voter verbatims" />

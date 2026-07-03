@@ -1,0 +1,51 @@
+---
+title: "News feeds"
+description: "Track current events with keyword-driven news feeds and use real articles as context in tests and focus groups."
+keywords: ["news feed", "gdelt", "current events", "context", "articles"]
+---
+
+A **news feed** is a workspace-scoped stream of current articles pulled from [GDELT](https://www.gdeltproject.org/), filtered by the keywords you care about. Feeds let you ground a simulation in what's actually happening right now — the same headlines your audience is seeing this week.
+
+## Create a feed
+
+Go to **Feeds → New feed** and give it:
+
+- **Name** — how you'll recognise it in the picker, for example `Cost of living · AU`.
+- **Keywords** — comma-separated terms that select matching articles from GDELT.
+
+Simulant pulls fresh articles when you create the feed and then automatically **every 6 hours**. You can also click **Refresh** on any feed detail page to sync on demand.
+
+## What's in a feed
+
+Open a feed to see its recent articles. Each item shows:
+
+- **Headline** — links out to the source.
+- **Outlet and published time** — where and when it ran.
+- **Summary** — a short synopsis generated from the article body, so you can scan the feed without opening every link.
+
+Articles are enriched in the background — headlines appear first, and summaries fill in as scraping and summarisation complete. Only enriched articles are selectable as test context.
+
+<Note>
+  Feeds are private to your workspace. The underlying GDELT data is public, but the feed you build (its keywords, filters, and article selection) stays inside your workspace.
+</Note>
+
+## Use articles as test context
+
+The strongest use of a feed is grounding a [test](/guides/tests) in the current environment. In the test builder, under **Context → Custom**, pick a feed and select up to **four articles**. Those articles are passed to every persona in the run, so their reactions reflect the news your audience has actually been reading.
+
+Because articles are stored with the test, a run stays reproducible — you can revisit the exact context the panel saw, even weeks later when the news cycle has moved on.
+
+<Tip>
+  Keep feeds narrow. A feed with two or three sharp keywords produces a cleaner shortlist than one that tries to cover everything. Create separate feeds per topic — cost of living, election coverage, a specific competitor — rather than a single catch-all.
+</Tip>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Run a test" icon="flask" href="/guides/tests">
+    Attach feed articles to a test as real-world context.
+  </Card>
+  <Card title="How grounding works" icon="database" href="/data/grounding">
+    Why every response traces back to the record.
+  </Card>
+</CardGroup>
