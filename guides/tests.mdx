@@ -36,15 +36,29 @@ Add **variants** to compare options side by side — up to four, labelled A thro
 
 Pick the **cohort** the test runs against, or create a new one inline. Every variant is shown to the same audience, so differences in the result come from the creative, not the crowd. See [Build a cohort](/guides/cohorts).
 
-### Context
+### What do your respondents know?
 
-Set the real-world environment the population is reacting within:
+Every test is anchored to a shared world state and a specific body of knowledge, so a run can be reconstructed and validated later. Set both in the **What do your respondents know?** section.
 
+**World state.** Pick the real-world environment the population is reacting within:
+
+- **Neutral** — strip out context for a clean baseline. Non-blocking default.
 - **Current** — today's prevailing issues, mood, and events.
-- **Neutral** — strip out context for a clean baseline.
 - **Custom** — specify the **issues**, **mood**, **events**, and **competitive** pressure yourself.
 
-Context is saved with the test so a run can be reconstructed and validated later.
+**Specific knowledge.** Add what respondents should know about the people, events, or products your creative and questions reference. Without this, respondents default to what an average member of the cohort would plausibly know — which usually isn't the specifics of your brand, candidate, or launch.
+
+Select **Check references** to scan your questions and creative for named people and events. Simulant surfaces each one as a suggestion; for every suggestion you can:
+
+- **Write it myself** — type the neutral facts respondents should treat as given.
+- **Draft with research** — get a short, neutral factual draft in the editable field. Review it for accuracy and neutrality, edit as needed, then accept.
+- **Ignore** — dismiss the suggestion.
+
+Nothing is stored until you accept an item. Accepted items are saved with the test, tagged as **manual** or **research-assisted**, and used verbatim on every run — Simulant never re-fetches or updates them between runs.
+
+<Tip>
+  Neutral world state is compatible with specific knowledge — use it when you want a clean baseline reaction to a named subject respondents wouldn't otherwise recognize.
+</Tip>
 
 ### Metrics
 
