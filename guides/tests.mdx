@@ -65,9 +65,26 @@ Drag to reorder questions. A good test mixes a few open-ended prompts with struc
 Tune how the run executes:
 
 - **Sample size** — how many personas to draw from the cohort (capped at the cohort's `n`), or **Max**.
+- **Include control baseline** — score the same panel *unexposed* alongside each variant so every metric reads as **lift vs control**, not just an absolute score. On by default. See [Control baseline and lift](#control-baseline-and-lift).
 - **Randomize** — vary the order variants are shown to reduce order bias.
 - **Attention checks** — include checks that keep responses honest.
 - **Agent behavior** — toggles such as allowing **refusals**, requiring **grounded** answers, capturing **verbatims**, and probing with **adversarial** follow-ups.
+
+<Note>
+  Turning the control baseline on adds one extra arm to the run, so the response and credit estimate in the live panel goes up accordingly.
+</Note>
+
+### Control baseline and lift
+
+When **Include control baseline** is on, Simulant scores an extra arm called the **control**: the same respondents from your cohort, evaluated *without* seeing any creative. Every variant is then compared to that unexposed baseline on a per-respondent basis, so the read-out is paired lift rather than absolute scores that drift with panel composition.
+
+Use control baseline when you want to know:
+
+- Whether a creative actually *moves* the audience versus how they already felt.
+- Which variant produces the biggest lift, not just the highest raw score.
+- Where lift concentrates by segment — a variant can win overall while flat-lining the audience you care about.
+
+Turn it off only when you need to keep runs as cheap as possible and absolute scores are enough — for example, quick smoke checks on early drafts.
 
 ## Run it
 
@@ -81,8 +98,9 @@ Click **Run test**. Simulant questions the population and assembles the results;
 
 Open a finished test to see:
 
-- **Headline metrics** — recall, sentiment, intent, and clarity, each scored out of 100 against a benchmark.
-- **Sentiment by segment** — where the creative resonates and where it falls flat, split positive / neutral / negative.
+- **Headline metrics** — recall, sentiment, intent, and clarity, each scored out of 100 against a benchmark. When a control baseline was run, each metric also shows its **vs control** delta.
+- **Lift vs control** — a table of every metric with the control baseline shown struck through and each variant's signed lift beside it. Positive lift means the creative moved the panel; negative means it moved them the wrong way.
+- **Sentiment by segment** — where the creative resonates and where it falls flat, split positive / neutral / negative, with per-segment lift when a control was run.
 - **Verbatims** — what individual personas said, filterable by tone. Read the reasoning, not just the score.
 - **Themes** — verbatims clustered into the patterns that recur across the panel.
 - **Recommendations** — the actions the result points to.
