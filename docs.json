@@ -57,7 +57,8 @@
         "group": "Data",
         "pages": [
           "data/datasets",
-          "data/grounding"
+          "data/grounding",
+          "data/twins"
         ]
       },
       {
