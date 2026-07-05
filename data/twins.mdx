@@ -1,0 +1,106 @@
+---
+title: "Respondent twins"
+description: "Build twins of real survey respondents, run repeated probabilistic inference, and read the result with an uncertainty interval you can defend."
+keywords: ["respondent twin", "researchability", "validation", "calibration", "uncertainty", "microdata"]
+---
+
+A **respondent twin** is a persona bound one-to-one to a real person in a survey dataset. Where a general cohort persona is drawn from population statistics, a twin carries a specific respondent's answers, their survey weight, and the missingness of their record. That gives you a research surface built directly on **microdata** — real people's real answers — with a defensible read-out on top.
+
+<Note>
+  Respondent twins are an **early-access** capability layered on top of the standard [tests](/guides/tests) flow. Contact [support@simulant.tech](mailto:support@simulant.tech) to enable them for your workspace.
+</Note>
+
+## When to use twins
+
+Reach for twins when a study needs to stand up to audit or replication:
+
+- **Reproducing a survey** you already fielded, to check what a follow-up wave would show.
+- **Extending a survey** with new questions the original didn't ask.
+- **Segment-level read-outs** where you need survey-weighted estimates and an effective sample size, not just headline numbers.
+- **Anything where methodology matters** — regulator submissions, published research, campaign committees.
+
+For creative, message, and concept testing keep using [Tests](/guides/tests) — they're faster to set up and cover most day-to-day work.
+
+## How the pipeline works
+
+<Steps>
+  <Step title="Import microdata">
+    Load a dataset with its **codebook** — the question text, value labels, missing-value codes, and domain tags for each variable — plus one row per respondent and, if you have them, per-respondent **survey weights**. Missing answers are classified (`not_asked`, `skipped`, `refused`, `dont_know`, `inapplicable`, `source_missing`) rather than collapsed to null.
+  </Step>
+  <Step title="Build twin versions">
+    A **twin version** is a snapshot of the twins built from a dataset — one twin per respondent, with a deterministic **twin core** of stable identifying answers and an embedding index over the codebook. Versioning means a run stays reproducible even after the underlying data changes.
+  </Step>
+  <Step title="Ask a study question">
+    A **study** is a set of typed questions (binary, single choice, likert, numeric, ranking, multi-select, or open text) asked against a twin version. Each question is answered by every eligible twin.
+  </Step>
+  <Step title="Retrieve grounding">
+    For each twin, Simulant ranks the twin's own observed answers by relevance to the study question and keeps the most useful evidence as a **grounding bundle**. The bundle is what the twin reasons over — you can inspect it after the run.
+  </Step>
+  <Step title="Run repeated inference">
+    Each twin answers each question **N independent times** (see [Run count presets](#run-count-presets)). Every run returns a full probability distribution and cites the evidence it used. Runs are idempotent, so a partial failure resumes without duplicating work.
+  </Step>
+  <Step title="Aggregate with survey weights">
+    Twin-level answers are averaged across runs, then combined at the study level with each respondent's survey weight: `P(k) = Σ wᵢ · pᵢ(k) / Σ wᵢ`. Results carry an **effective sample size** (Kish ESS) alongside the point estimate.
+  </Step>
+</Steps>
+
+## Researchability
+
+Before you spend inference on a study, run a **researchability assessment**. It scores how well the dataset supports each question on a 0–100 scale and returns a band:
+
+| Band | Score | What it means |
+|------|-------|---------------|
+| **High** | ≥ 75 | Strong, relevant evidence for most respondents. Proceed with confidence. |
+| **Moderate** | 45–74 | Partial support. Read segment cuts carefully and consider a validation run. |
+| **Low** | < 45 | Sparse or weak evidence. Human fieldwork is recommended before acting on the result. |
+
+The score is transparent — it decomposes into retrieval strength, evidence volume, domain coverage, and historical validation performance for the same question type. You can always proceed regardless; the warning is preserved on the study record.
+
+## Run count presets
+
+Pick how many independent inference runs each twin performs per question. More runs shrink the uncertainty interval at the cost of tokens.
+
+| Preset | Runs per twin per question | Use it for |
+|--------|----------------------------|------------|
+| `preview` | 1 | A cheap smoke test while you iterate on question wording. |
+| `standard` | 5 | Most studies. Good balance of stability and cost. |
+| `high_confidence` | 10 | Publishable read-outs and close calls between options. |
+| `validation_max` | 20 | Method validation and benchmarking against real fieldwork. |
+
+## Validation and calibration
+
+Every twin version can be held out and back-tested against the microdata it came from:
+
+- **Holdouts** — random item, chronological, whole-domain, or leave-one-question-out. The held-out target is stripped from retrieval and from twin cores, with an asserted leakage guard.
+- **Twin fidelity** — accuracy, macro-F1, log loss, Brier, expected calibration error, and ordinal metrics like MAE, Spearman, and QWK.
+- **Population fidelity** — total variation, Jensen–Shannon, Wasserstein, and marginal error against the survey's own marginals.
+- **Baselines** — every run is compared to population-modal, subgroup-modal, and nearest-neighbour baselines so a "wins" claim is grounded.
+- **Calibration** — an optional temperature-scaling layer is fitted on validation folds only. It's used only if it beats the identity map on held-out log loss, and pre-calibration distributions are preserved.
+
+## Reading the results
+
+Study results come with the numbers **and** the methodology behind them:
+
+- **Weighted estimate** for each response option, with a **simulation uncertainty interval** that reflects run-to-run dispersion.
+- **Effective sample size** after weighting.
+- **Researchability band** and the score's underlying features.
+- **Methodology record** — dataset name and version, twin version, retrieval config, prompt version, model config, run count, and study seed.
+
+<Warning>
+  A simulation uncertainty interval is **not** a survey confidence interval. It captures how stable the model is across independent runs, given the microdata it was grounded in. It does not replace the uncertainty of the underlying fieldwork, and synthetic draws are not additional independent human observations.
+</Warning>
+
+## Exports
+
+Every completed study produces:
+
+- `study_summary.csv` — weighted point estimates and uncertainty intervals per question and option.
+- `respondent_estimates.csv` — per-twin mean distributions with stability and entropy.
+- `inference_runs.jsonl` — every individual run with its grounding bundle references.
+- `methodology.json` — the full lineage: dataset, twin version, retrieval config, prompt version, model config, run count, seed, and calibration state.
+
+All outputs are labelled synthetic and distinguish source respondents, inference runs, and rendered draws so a reviewer can tell what each row represents.
+
+<Card title="How grounding works" icon="database" href="/data/grounding">
+  See how twin studies fit into Simulant's broader grounding methodology.
+</Card>

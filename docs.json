@@ -43,6 +43,7 @@
           "guides/cohorts",
           "guides/creatives",
           "guides/tests",
+          "guides/polls",
           "guides/focus-groups"
         ]
       },
@@ -58,7 +59,8 @@
         "pages": [
           "data/datasets",
           "data/feeds",
-          "data/grounding"
+          "data/grounding",
+          "data/twins"
         ]
       },
       {
