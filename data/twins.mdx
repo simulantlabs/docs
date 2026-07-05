@@ -110,8 +110,21 @@ Every twin version can be held out and back-tested against the microdata it came
 - **Holdouts** — random item, chronological, whole-domain, or leave-one-question-out. The held-out target is stripped from retrieval and from twin cores, with an asserted leakage guard.
 - **Twin fidelity** — accuracy, macro-F1, log loss, Brier, expected calibration error, and ordinal metrics like MAE, Spearman, and QWK.
 - **Population fidelity** — total variation, Jensen–Shannon, Wasserstein, and marginal error against the survey's own marginals.
-- **Baselines** — every run is compared to population-modal, subgroup-modal, and nearest-neighbour baselines so a "wins" claim is grounded.
+- **Baselines** — every run is compared to population-modal, subgroup-modal, nearest-neighbour, and the **MVP persona-impersonation** baseline (a whole-prose persona given one shot at temperature 0.9) so a "wins" claim is grounded against both trivial baselines and the legacy method.
 - **Calibration** — an optional temperature-scaling layer is fitted on validation folds only. It's used only if it beats the identity map on held-out log loss, and pre-calibration distributions are preserved.
+
+### Validation dashboard
+
+Open **Twin studies → Validation dashboard** to benchmark a dataset's twin version against the four baselines on leakage-guarded holdouts. Queue a run from any dataset and the dashboard polls while it works.
+
+Each benchmark reports every engine side by side on:
+
+- **Accuracy** and **balanced accuracy**.
+- **Macro F1**.
+- **Log loss**, **Brier**, and **ECE** — lower is better.
+- **Population JSD** — the divergence between predicted and true marginals, lower is better.
+
+The twin engine's accuracy is also broken down by **domain**, **response type**, and **subgroup**, so you can see where it wins, where it ties the MVP baseline, and where a baseline still edges it out. The dashboard deliberately doesn't collapse the comparison to a single headline number — fidelity, calibration, and population divergence each tell you something different.
 
 ## Reading the results
 
