@@ -7,7 +7,7 @@ keywords: ["respondent twin", "researchability", "validation", "calibration", "u
 A **respondent twin** is a persona bound one-to-one to a real person in a survey dataset. Where a general cohort persona is drawn from population statistics, a twin carries a specific respondent's answers, their survey weight, and the missingness of their record. That gives you a research surface built directly on **microdata** — real people's real answers — with a defensible read-out on top.
 
 <Note>
-  Respondent twins are an **early-access** capability layered on top of the standard [tests](/guides/tests) flow. Contact [support@simulant.tech](mailto:support@simulant.tech) to enable them for your workspace.
+  Respondent twins are an **early-access** capability alongside the standard [tests](/guides/tests) flow. Twin studies live under **Simulations → Twin studies** in the app. Contact [support@simulant.tech](mailto:support@simulant.tech) if you need them enabled for your workspace.
 </Note>
 
 ## When to use twins
@@ -44,6 +44,42 @@ For creative, message, and concept testing keep using [Tests](/guides/tests) —
   </Step>
 </Steps>
 
+## Run a twin study
+
+Twin studies live under **Simulations → Twin studies** in the app. Each study reuses a **twin version** built from a dataset, so once a dataset is imported you only need to pick it — Simulant provisions the twin cores and embedding index behind the scenes.
+
+### Build
+
+Go to **Twin studies → New twin study**. Work down the builder:
+
+- **Name** the study.
+- **Pick a twin dataset**. The list shows every dataset in your workspace that has an active twin version.
+- **Add questions**. Supported types are single choice, multi select, yes/no, Likert, and rating. Add options where relevant; questions without options fall back to single choice.
+- **Choose a run count preset** — Preview (1 run per twin per question), Standard (5), or High confidence (10). See [Run count presets](#run-count-presets).
+
+The rail on the right runs a **researchability check** on your questions before you field the study. Each question gets a score, a band (high / moderate / low), and the reasons behind it — retrieval strength, evidence volume, domain coverage, and prior validation performance for the question type. Low-support questions can still run; the warning is preserved onto the results.
+
+### Results
+
+Open a completed study to see per-question weighted distribution bars with an unweighted comparison, the headline share, and an **uncertainty strip**:
+
+- **Source twins evaluated** and **inference runs executed**.
+- **Kish effective n** — the sample size after survey weighting.
+- **Mean stability** and **high-uncertainty share** across twins.
+- **Mean entropy** of the twin-level distributions.
+- **Researchability chip** — the pre-run band, preserved on the result.
+
+Open the **Methodology** drawer for the study's lineage: dataset, source respondent count, twin version, retrieval config, model and prompt version, repetitions, weighting, and study seed. The interval on the chart is labelled **simulation uncertainty interval** deliberately — see the warning below.
+
+### Grounding inspector
+
+From any result, open the **Grounding inspector** sheet to see how each twin arrived at its answer. Twins are listed by a pseudonymous key with their weight, modal and deterministic sampled answer, stability, and entropy. Drill into a twin to see:
+
+- The **stable core fields** — the deterministic identifying answers that anchor the twin.
+- The **retrieved evidence** used for that twin × question, with per-evidence relevance score, ranking reason, and grounding density.
+
+Use it to spot-check calls, defend a result in review, or diagnose why a question landed in the moderate or low researchability band.
+
 ## Researchability
 
 Before you spend inference on a study, run a **researchability assessment**. It scores how well the dataset supports each question on a 0–100 scale and returns a band:
@@ -74,8 +110,21 @@ Every twin version can be held out and back-tested against the microdata it came
 - **Holdouts** — random item, chronological, whole-domain, or leave-one-question-out. The held-out target is stripped from retrieval and from twin cores, with an asserted leakage guard.
 - **Twin fidelity** — accuracy, macro-F1, log loss, Brier, expected calibration error, and ordinal metrics like MAE, Spearman, and QWK.
 - **Population fidelity** — total variation, Jensen–Shannon, Wasserstein, and marginal error against the survey's own marginals.
-- **Baselines** — every run is compared to population-modal, subgroup-modal, and nearest-neighbour baselines so a "wins" claim is grounded.
+- **Baselines** — every run is compared to population-modal, subgroup-modal, nearest-neighbour, and the **MVP persona-impersonation** baseline (a whole-prose persona given one shot at temperature 0.9) so a "wins" claim is grounded against both trivial baselines and the legacy method.
 - **Calibration** — an optional temperature-scaling layer is fitted on validation folds only. It's used only if it beats the identity map on held-out log loss, and pre-calibration distributions are preserved.
+
+### Validation dashboard
+
+Open **Twin studies → Validation dashboard** to benchmark a dataset's twin version against the four baselines on leakage-guarded holdouts. Queue a run from any dataset and the dashboard polls while it works.
+
+Each benchmark reports every engine side by side on:
+
+- **Accuracy** and **balanced accuracy**.
+- **Macro F1**.
+- **Log loss**, **Brier**, and **ECE** — lower is better.
+- **Population JSD** — the divergence between predicted and true marginals, lower is better.
+
+The twin engine's accuracy is also broken down by **domain**, **response type**, and **subgroup**, so you can see where it wins, where it ties the MVP baseline, and where a baseline still edges it out. The dashboard deliberately doesn't collapse the comparison to a single headline number — fidelity, calibration, and population divergence each tell you something different.
 
 ## Reading the results
 
@@ -92,7 +141,7 @@ Study results come with the numbers **and** the methodology behind them:
 
 ## Exports
 
-Every completed study produces:
+Every completed study produces four artifacts, available from the top-bar export menu on the study page:
 
 - `study_summary.csv` — weighted point estimates and uncertainty intervals per question and option.
 - `respondent_estimates.csv` — per-twin mean distributions with stability and entropy.
