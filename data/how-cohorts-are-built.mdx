@@ -1,0 +1,66 @@
+---
+title: "How cohorts are built"
+description: "The methodology behind Simulant cohorts — from population description to calibrated synthetic respondents."
+keywords: ["cohort", "methodology", "synthetic respondents", "generation", "calibration", "white paper"]
+---
+
+A [cohort](/guides/cohorts) is not a prompt that roleplays your audience. It is a calibrated panel of synthetic respondents whose composition is fixed by official and academic statistics before any generative model is asked to speak.
+
+This page summarizes how that works. For the full technical specification — schema, sources, constrained generation, calibration, and contamination-controlled validation — read the white paper:
+
+<Card title="Generating synthetic survey respondents" icon="file-lines" href="https://simulant.tech/blog/generating-synthetic-respondents/">
+  The Simulant methodology for building synthetic survey panels.
+</Card>
+
+## Two audience modes
+
+Simulant builds audiences in two ways, and they carry different evidence:
+
+| Mode | What it means | When to use it |
+|------|----------------|----------------|
+| **Respondent-backed** | Each persona is anchored to a real respondent record from survey microdata on the platform | Highest-evidence mode wherever suitable microdata exists |
+| **Generated** | Respondents are created inside externally fixed distributions from census, election, survey, and polling sources | When no respondent-level dataset covers the population you need |
+
+Every cohort discloses which mode built it. A generated panel and a respondent-backed one are never presented as equally grounded.
+
+## Distributions first, individuals second
+
+The organising principle: **distributions are deterministic, individuals are generative.**
+
+1. You describe the population in plain language in the [cohort builder](/guides/cohorts).
+2. Simulant maps that description onto prepared statistical sources and targets.
+3. Composition — age, region, education, income, and other spine fields — is set by those targets before any language model runs.
+4. Individual respondents are then instantiated *inside* those fixed distributions.
+
+That split matters. Compositional bias (the wrong people) is driven toward zero by targeting and raking. Response bias (the right people answering wrongly) is measured against external ground truth — never assumed away.
+
+## What you see in the product
+
+When you [build a cohort](/guides/cohorts), the builder and Deep Research report make the method visible:
+
+- **Population description** — the plain-language brief Simulant interprets into structured filters
+- **Region and demographics** — the hard constraints on who can appear in the panel
+- **Characteristics** — attitudes and dispositions grounded in source data, not invented labels
+- **Size and precision** — how many respondents you draw and the implied ±pp
+- **Report** — a sourced narrative about who the audience is and what moves them
+
+<Frame caption="A Deep Research report for Suburban Swing Voters — who they are, what moves them, and how to message them.">
+  <img src="/images/app/cohort-report.png" alt="Cohort report tab showing a long Deep Research narrative about Suburban Swing Voters" />
+</Frame>
+
+## Representativeness is not validity
+
+A panel can match every demographic target and still answer wrongly. Composition and response behaviour are different properties controlled by different machinery. Simulant keeps that distinction visible on every result surface: composition is controlled; response validity is measured.
+
+For how this connects to simulation design and validation, see [How grounding works](/data/grounding) and the companion paper on [synthetic research methodology](https://simulant.tech/blog/synthetic-research-methodology/).
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Build a cohort" icon="users" href="/guides/cohorts">
+    Create an audience in the product.
+  </Card>
+  <Card title="How grounding works" icon="database" href="/data/grounding">
+    Why every response traces back to the record.
+  </Card>
+</CardGroup>

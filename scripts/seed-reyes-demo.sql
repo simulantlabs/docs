@@ -192,16 +192,14 @@ BEGIN
     jsonb_build_object(
       'version', 1,
       'nodes', jsonb_build_array(
-        jsonb_build_object('id','n-cohort','type','cohort','position',jsonb_build_object('x',120,'y',80),'data',jsonb_build_object('cohortId', v_cohort_swing)),
-        jsonb_build_object('id','n-asset','type','asset','position',jsonb_build_object('x',120,'y',260),'data',jsonb_build_object('creativeId', v_creative_tv)),
-        jsonb_build_object('id','n-test','type','test','position',jsonb_build_object('x',420,'y',160),'data',jsonb_build_object('recordId', v_test_col)),
-        jsonb_build_object('id','n-fg','type','focus-group','position',jsonb_build_object('x',720,'y',160),'data',jsonb_build_object('recordId', v_fg_col))
+        jsonb_build_object('id','n-cohort','type','cohort','position',jsonb_build_object('x',80,'y',160),'data',jsonb_build_object('cohortId', v_cohort_swing)),
+        jsonb_build_object('id','n-test','type','test','position',jsonb_build_object('x',480,'y',120),'data',jsonb_build_object('recordId', v_test_col)),
+        jsonb_build_object('id','n-fg','type','focus-group','position',jsonb_build_object('x',880,'y',280),'data',jsonb_build_object('recordId', v_fg_col))
       ),
       'edges', jsonb_build_array(
         jsonb_build_object('id','e1','source','n-cohort','target','n-test','targetHandle','respondents'),
-        jsonb_build_object('id','e2','source','n-asset','target','n-test','targetHandle','asset-0'),
         jsonb_build_object('id','e3','source','n-cohort','target','n-fg','targetHandle','respondents'),
-        jsonb_build_object('id','e4','source','n-asset','target','n-fg','targetHandle','asset')
+        jsonb_build_object('id','e5','source','n-test','target','n-fg','targetHandle','trigger')
       )
     ),
     ARRAY['Hero','TV'], v_user, now() - interval '2 hours'
@@ -499,10 +497,10 @@ BEGIN
     (v_flow_run_multi, v_flow_health, v_ws, 'manual', 'running', v_user, now() - interval '40 minutes', NULL);
 
   INSERT INTO flow_node_runs (flow_run_id, workspace_id, node_id, node_type, status, output, test_run_id, focus_group_run_id, created_at, finished_at) VALUES
-    (v_flow_run_col, v_ws, 'n-test', 'test', 'done', '{}'::jsonb, v_run_col, NULL, now() - interval '3 hours', now() - interval '2 hours'),
-    (v_flow_run_col, v_ws, 'n-fg', 'focus-group', 'done', '{}'::jsonb, NULL, v_run_fg, now() - interval '3 hours', now() - interval '2 hours'),
-    (v_flow_run_ballot, v_ws, 'n-poll', 'poll', 'done', '{}'::jsonb, v_run_ballot, NULL, now() - interval '6 hours', now() - interval '5 hours'),
-    (v_flow_run_multi, v_ws, 'n-test', 'test', 'running', '{}'::jsonb, v_run_health, NULL, now() - interval '40 minutes', NULL);
+    (v_flow_run_col, v_ws, 'n-test', 'test', 'done', jsonb_build_object('kind','test','recordId', v_test_col), v_run_col, NULL, now() - interval '3 hours', now() - interval '2 hours'),
+    (v_flow_run_col, v_ws, 'n-fg', 'focus-group', 'done', jsonb_build_object('kind','focus-group','recordId', v_fg_col), NULL, v_run_fg, now() - interval '3 hours', now() - interval '2 hours'),
+    (v_flow_run_ballot, v_ws, 'n-poll', 'poll', 'done', jsonb_build_object('kind','poll','recordId', v_poll_ballot), v_run_ballot, NULL, now() - interval '6 hours', now() - interval '5 hours'),
+    (v_flow_run_multi, v_ws, 'n-test', 'test', 'running', jsonb_build_object('kind','test','recordId', v_test_health), v_run_health, NULL, now() - interval '40 minutes', NULL);
 
   UPDATE simulation_flows SET latest_run_id = v_flow_run_col, status = 'done' WHERE id = v_flow_col;
   UPDATE simulation_flows SET latest_run_id = v_flow_run_ballot, status = 'done' WHERE id = v_flow_ballot;

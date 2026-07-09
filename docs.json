@@ -60,6 +60,7 @@
         "group": "Data",
         "pages": [
           "data/datasets",
+          "data/how-cohorts-are-built",
           "data/grounding",
           "data/twins"
         ]
@@ -97,7 +98,7 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:support@simulant.tech"
+        "href": "https://simulant.tech/support/"
       }
     ],
     "primary": {

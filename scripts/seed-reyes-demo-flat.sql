@@ -129,16 +129,14 @@ DELETE FROM workspaces WHERE id = 'a1111111-1111-4111-8111-111111111111'::uuid;
     jsonb_build_object(
       'version', 1,
       'nodes', jsonb_build_array(
-        jsonb_build_object('id','n-cohort','type','cohort','position',jsonb_build_object('x',120,'y',80),'data',jsonb_build_object('cohortId', 'a3333333-3333-4333-8333-333333333331'::uuid)),
-        jsonb_build_object('id','n-asset','type','asset','position',jsonb_build_object('x',120,'y',260),'data',jsonb_build_object('creativeId', 'a4444444-4444-4444-8444-444444444441'::uuid)),
-        jsonb_build_object('id','n-test','type','test','position',jsonb_build_object('x',420,'y',160),'data',jsonb_build_object('recordId', 'a6666666-6666-4666-8666-666666666661'::uuid)),
-        jsonb_build_object('id','n-fg','type','focus-group','position',jsonb_build_object('x',720,'y',160),'data',jsonb_build_object('recordId', 'a7777777-7777-4777-8777-777777777771'::uuid))
+        jsonb_build_object('id','n-cohort','type','cohort','position',jsonb_build_object('x',80,'y',160),'data',jsonb_build_object('cohortId', 'a3333333-3333-4333-8333-333333333331'::uuid)),
+        jsonb_build_object('id','n-test','type','test','position',jsonb_build_object('x',480,'y',120),'data',jsonb_build_object('recordId', 'a6666666-6666-4666-8666-666666666661'::uuid)),
+        jsonb_build_object('id','n-fg','type','focus-group','position',jsonb_build_object('x',880,'y',280),'data',jsonb_build_object('recordId', 'a7777777-7777-4777-8777-777777777771'::uuid))
       ),
       'edges', jsonb_build_array(
         jsonb_build_object('id','e1','source','n-cohort','target','n-test','targetHandle','respondents'),
-        jsonb_build_object('id','e2','source','n-asset','target','n-test','targetHandle','asset-0'),
         jsonb_build_object('id','e3','source','n-cohort','target','n-fg','targetHandle','respondents'),
-        jsonb_build_object('id','e4','source','n-asset','target','n-fg','targetHandle','asset')
+        jsonb_build_object('id','e5','source','n-test','target','n-fg','targetHandle','trigger')
       )
     ),
     ARRAY['Hero','TV'], '294aaad0-3274-4649-9ba0-bf7929ecd1c8'::uuid, now() - interval '2 hours'
@@ -430,10 +428,10 @@ DELETE FROM workspaces WHERE id = 'a1111111-1111-4111-8111-111111111111'::uuid;
     ('a9999999-9999-4999-8999-999999999993'::uuid, 'a5555555-5555-4555-8555-555555555552'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'manual', 'running', '294aaad0-3274-4649-9ba0-bf7929ecd1c8'::uuid, now() - interval '40 minutes', NULL);
 
   INSERT INTO flow_node_runs (flow_run_id, workspace_id, node_id, node_type, status, output, test_run_id, focus_group_run_id, created_at, finished_at) VALUES
-    ('a9999999-9999-4999-8999-999999999991'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'n-test', 'test', 'done', '{}'::jsonb, 'a8888888-8888-4888-8888-888888888881'::uuid, NULL, now() - interval '3 hours', now() - interval '2 hours'),
-    ('a9999999-9999-4999-8999-999999999991'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'n-fg', 'focus-group', 'done', '{}'::jsonb, NULL, 'a8888888-8888-4888-8888-888888888888'::uuid, now() - interval '3 hours', now() - interval '2 hours'),
-    ('a9999999-9999-4999-8999-999999999992'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'n-poll', 'poll', 'done', '{}'::jsonb, 'a8888888-8888-4888-8888-888888888886'::uuid, NULL, now() - interval '6 hours', now() - interval '5 hours'),
-    ('a9999999-9999-4999-8999-999999999993'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'n-test', 'test', 'running', '{}'::jsonb, 'a8888888-8888-4888-8888-888888888882'::uuid, NULL, now() - interval '40 minutes', NULL);
+    ('a9999999-9999-4999-8999-999999999991'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'n-test', 'test', 'done', '{"kind":"test","recordId":"a6666666-6666-4666-8666-666666666661"}'::jsonb, 'a8888888-8888-4888-8888-888888888881'::uuid, NULL, now() - interval '3 hours', now() - interval '2 hours'),
+    ('a9999999-9999-4999-8999-999999999991'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'n-fg', 'focus-group', 'done', '{"kind":"focus-group","recordId":"a7777777-7777-4777-8777-777777777771"}'::jsonb, NULL, 'a8888888-8888-4888-8888-888888888888'::uuid, now() - interval '3 hours', now() - interval '2 hours'),
+    ('a9999999-9999-4999-8999-999999999992'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'n-poll', 'poll', 'done', '{"kind":"poll","recordId":"a6666666-6666-4666-8666-666666666666"}'::jsonb, 'a8888888-8888-4888-8888-888888888886'::uuid, NULL, now() - interval '6 hours', now() - interval '5 hours'),
+    ('a9999999-9999-4999-8999-999999999993'::uuid, 'a1111111-1111-4111-8111-111111111111'::uuid, 'n-test', 'test', 'running', '{"kind":"test","recordId":"a6666666-6666-4666-8666-666666666662"}'::jsonb, 'a8888888-8888-4888-8888-888888888882'::uuid, NULL, now() - interval '40 minutes', NULL);
 
   UPDATE simulation_flows SET latest_run_id = 'a9999999-9999-4999-8999-999999999991'::uuid, status = 'done' WHERE id = 'a5555555-5555-4555-8555-555555555551'::uuid;
   UPDATE simulation_flows SET latest_run_id = 'a9999999-9999-4999-8999-999999999992'::uuid, status = 'done' WHERE id = 'a5555555-5555-4555-8555-555555555556'::uuid;
