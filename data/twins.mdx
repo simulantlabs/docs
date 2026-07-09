@@ -4,7 +4,9 @@ description: "Build twins of real survey respondents, run repeated probabilistic
 keywords: ["respondent twin", "researchability", "validation", "calibration", "uncertainty", "microdata"]
 ---
 
-A **respondent twin** is a persona bound one-to-one to a real person in a survey dataset. Where a general cohort persona is drawn from population statistics, a twin carries a specific respondent's answers, their survey weight, and the missingness of their record. That gives you a research surface built directly on **microdata** — real people's real answers — with a defensible read-out on top.
+A **respondent twin** is a respondent model anchored 1:1 to a real person in a survey dataset — the highest-evidence mode described in [How cohorts are built](/data/how-cohorts-are-built). Where a generated cohort is built inside externally fixed distributions, a twin carries a specific respondent's answers, their survey weight, and the missingness of their record.
+
+The empirical foundation is the human data. The language model's job is to infer how that respondent is likely to answer a new question, conditional on what they have already told researchers — with probabilities preserved, instability measured, and held-out validation against answers real people gave. See [How grounding works](/data/grounding) and the [methodology white paper](https://simulant.tech/blog/synthetic-research-methodology/).
 
 <Note>
   Respondent twins are an **early-access** capability alongside the standard [simulation](/guides/simulations) flow. Twin studies are accessed from dataset detail pages for microdata imports. Contact [Support](https://simulant.tech/support/) if you need them enabled for your workspace.

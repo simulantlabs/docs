@@ -1,10 +1,12 @@
 ---
 title: "Introduction"
-description: "Simulant recreates a population as grounded, questionable minds so you can test your thinking before the real world sees it."
-keywords: ["simulant", "simulation", "synthetic research", "personas", "docs"]
+description: "Simulant is a rigorous inference layer on observed human evidence — so you can test decisions before the real world sees them."
+keywords: ["simulant", "simulation", "synthetic research", "personas", "docs", "methodology"]
 ---
 
-Simulant is a simulation of the people you're trying to reach. It recreates a representative population as grounded personas — modelled on real, official data — so you can put a creative, a message, or a decision in front of them and read the reaction before you commit to it in the real world.
+Simulant turns real data into living simulations — so decisions can be tested before they become real.
+
+It is not AI roleplay. It is a research engine grounded in observed human evidence: official statistics, survey microdata, and calibrated synthetic panels. You put a creative, a message, or a decision in front of a representative population and read the reaction — with composition controlled, uncertainty measured, and validity never assumed.
 
 Where traditional research takes a quarter, Simulant runs in a night. You can ask the same population again and again, cut the answer by any segment, and read the verbatims and the reasoning behind every number.
 
@@ -19,11 +21,11 @@ Where traditional research takes a quarter, Simulant runs in a night. You can as
   <Card title="Core concepts" icon="shapes" href="/concepts">
     Simulations, cohorts, assets, and library instruments — how the pieces fit.
   </Card>
-  <Card title="Run a simulation" icon="flask" href="/guides/simulations">
-    Compose polls, tests, and focus groups on the Model canvas.
-  </Card>
   <Card title="How grounding works" icon="database" href="/data/grounding">
-    Why every response traces back to the record.
+    Why synthetic research must be grounded, uncertain, and validated.
+  </Card>
+  <Card title="How cohorts are built" icon="microscope" href="/data/how-cohorts-are-built">
+    Distributions first, individuals second — the generation pipeline.
   </Card>
 </CardGroup>
 
@@ -48,18 +50,31 @@ The app is organised the same way these docs are:
 
 <Steps>
   <Step title="Ground a population">
-    Simulant builds personas from official datasets — census, electoral studies, social cohesion, household panels, and more. See [How grounding works](/data/grounding).
+    Composition is fixed by official and academic sources before any language model speaks. See [How grounding works](/data/grounding) and [How cohorts are built](/data/how-cohorts-are-built).
   </Step>
   <Step title="Define who you're reaching">
-    Build a [cohort](/guides/cohorts) with a plain-language population description, region, and characteristics.
+    Build a [cohort](/guides/cohorts) with a plain-language population description, region, and characteristics — respondent-backed or generated, always disclosed.
   </Step>
   <Step title="Compose a simulation">
     Create a [simulation](/guides/simulations), add poll, test, and focus group steps on the Model canvas, and wire them to your cohort and assets.
   </Step>
   <Step title="Read the answer">
-    Get quantitative measures, verbatims, themes, and recommendations — cut by any segment.
+    Get quantitative measures, verbatims, themes, and recommendations — with simulation precision reported separately from validity.
   </Step>
 </Steps>
+
+## Methodology
+
+Synthetic research inherits polling's use cases and should inherit polling's disclosure norms: published weighting methodology, stated error, and auditable composition.
+
+<CardGroup cols={2}>
+  <Card title="Generating synthetic survey respondents" icon="file-lines" href="https://simulant.tech/blog/generating-synthetic-respondents/">
+    Schema, sources, constrained generation, calibration, and validation.
+  </Card>
+  <Card title="Synthetic research needs a higher standard" icon="file-lines" href="https://simulant.tech/blog/synthetic-research-methodology/">
+    Why LLMs are powerful for research — and how we make them rigorous enough to trust.
+  </Card>
+</CardGroup>
 
 <Note>
   These docs describe the Simulant app at [app.simulant.tech](https://app.simulant.tech). If you don't have access yet, [book a demo](https://simulant.tech/contact?intent=demo).

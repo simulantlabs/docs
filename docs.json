@@ -124,7 +124,7 @@
       "vscode"
     ]
   },
-  "description": "Simulant simulates human behaviour so you can make more informed policy and business decisions.",
+  "description": "Simulant turns real data into living simulations — a rigorous inference layer on observed human evidence, not AI roleplay.",
   "redirects": [
     {
       "source": "/guides/insights",

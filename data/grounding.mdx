@@ -1,54 +1,116 @@
 ---
 title: "How grounding works"
-description: "Why every Simulant persona is built on the official record, and how that keeps results defensible."
-keywords: ["grounding", "data sources", "census", "methodology", "evidence"]
+description: "Why synthetic research must be grounded in observed human evidence, transparent about uncertainty, and validated against answers real people gave."
+keywords: ["grounding", "methodology", "synthetic research", "validation", "uncertainty", "evidence", "white paper"]
 ---
 
-Simulant is built on the official record — not vibes. Every persona is grounded in real data, and every response traces back to the signals behind it. This is what lets a result survive the room, the audit, and the front page.
+Synthetic research should not be AI roleplay. It should be a rigorous inference layer built on observed human evidence.
 
-## Model outcomes, not opinions
+That is the standard Simulant is built around. Large language models make it easy to ask more questions, earlier — but plausible is not the same as valid. A synthetic respondent can sound convincing while being too polished, too average, too certain, or too dependent on demographic stereotypes.
 
-People are unreliable narrators of themselves. A survey captures what someone *says* they'll do; Simulant optimizes for what a population actually *does*, grounded in the measurable record. That distinction is why simulated results can track — and sometimes beat — traditional fieldwork.
+> Can we constrain these models with real respondent evidence, measure uncertainty, and validate the outputs against human ground truth?
 
-## The record
+That is the methodological question. The companion white paper answers it in full:
 
-Personas are built from official, high-quality sources, including:
+<Card title="Synthetic research needs a higher standard" icon="file-lines" href="https://simulant.tech/blog/synthetic-research-methodology/">
+  Why LLMs are powerful for market research — and how we make them rigorous enough to trust.
+</Card>
 
-| Source | What it contributes | Coverage |
-|--------|--------------------|----------|
-| **Census** | Population, demographics, and geography | Official |
-| **Electoral studies** | Voting behavior and political attitudes | Longitudinal |
-| **Social cohesion** | Trust, values, and community sentiment | Annual |
-| **Household panels** | 17,000+ people tracked over two decades | Longitudinal |
-| **World Values Survey** | Global attitudes, values, and beliefs | Global |
-| **Media and comms** | Channel reach and media consumption | National |
+For how panels themselves are composed and calibrated, see [How cohorts are built](/data/how-cohorts-are-built) and the [generation white paper](https://simulant.tech/blog/generating-synthetic-respondents/).
 
-You can add your own [datasets](/data/datasets) on top of these to sharpen the population around your specific market.
+## Not an AI panel — an empirical research engine
 
-<Frame caption="Grounding in practice — a cohort is built from workspace datasets, and the preview shows a data-backed respondent.">
-  <img src="/images/app/cohort-builder.png" alt="Cohort builder showing population description, characteristics, and a grounded sample respondent preview" />
+The strongest version of synthetic research is not “ChatGPT pretending to be consumers.” It is a research layer that sits on top of real respondent-level data.
+
+Where suitable microdata exists, each synthetic respondent model is **anchored to an actual respondent record**. If a dataset contains 2,070 respondents, we start with 2,070 respondent models. We do not invent 10,000 fictional people to make the work sound more impressive.
+
+The language model has an important role, but it is not the empirical foundation. The empirical foundation is the human data. The model's job is to infer how a specific respondent is likely to answer a new question, conditional on what that respondent has already told researchers.
+
+Where no respondent-level dataset covers the population, Simulant uses the **generated** mode described in [How cohorts are built](/data/how-cohorts-are-built) — composition fixed by official statistics, individuals instantiated inside those distributions. Every audience discloses which mode built it.
+
+## The problem with generic AI personas
+
+If a platform creates a fictional person from a few demographic fields, then asks an LLM to imagine what that person would think, the result may be useful for brainstorming. It should not be mistaken for research-grade evidence.
+
+The risk is not that the output looks bad. The risk is that it looks too good — fluent explanations, neat motivations, coherent attitudes. Real people contradict themselves. They are unsure, inconsistent, and influenced by context. A methodology that smooths all of that into polished copy can mislead decision-makers.
+
+A more rigorous approach has to answer:
+
+- What real evidence grounded this answer?
+- Was the response inferred from an individual human record or from a stereotype?
+- How uncertain was the prediction?
+- Does the synthetic population preserve the distribution of the real one?
+- Has the method been validated against held-out human answers?
+- Does the system know when the source data is not strong enough to support a question?
+
+## How inference works (excerpt)
+
+At a high level, respondent-backed inference follows this flow — summarised from the [methodology paper](https://simulant.tech/blog/synthetic-research-methodology/):
+
+1. **Anchor** every respondent model to a real human record (demographics, answers, weights, missingness)
+2. **Retrieve** question-relevant evidence — not every field stuffed into a prompt
+3. **Estimate probabilities**, not just forced answers (`Yes: 0.68 · No: 0.32`)
+4. **Repeat inference** to measure instability (simulation uncertainty)
+5. **Apply source survey weights** after inference to preserve population structure
+6. **Separate** quantitative inference from qualitative expression
+7. **Persist an evidence trail** for every answer
+8. **Validate** against held-out answers real people actually gave
+
+### Estimate and expression are separate jobs
+
+When a panel answers a closed question, the quantity of record is a structured response distribution — per-respondent option probabilities — not a parse of the persona's prose. The verbal answer is generated as a *separate* artifact conditioned on the recorded response.
+
+Analysis runs on the elicited distribution. The prose exists for qualitative reading and is never re-aggregated into statistics. That separation matters: a model's storytelling register systematically distorts frequencies.
+
+### Simulation uncertainty is not a survey margin of error
+
+LLM outputs can be sensitive to prompt wording and configuration. Simulant measures its own instability — top-answer agreement, response entropy, run-to-run dispersion — rather than hiding it. We call this **simulation uncertainty**. We do not present it as a conventional survey margin of error, because it measures a different source of uncertainty.
+
+## Representativeness is not validity
+
+A panel can match every demographic and political target exactly and still answer wrongly. Composition and response behaviour are different properties:
+
+| Property | Controlled by | Reported as |
+|----------|---------------|-------------|
+| **Composition** | Targeting, raking, scorecard | Representativeness / calibration status |
+| **Response validity** | Held-out prediction, post-cutoff benchmarks | Domain validation status |
+| **Stability** | Seed and prompt replicates | Simulation uncertainty / precision |
+
+Every result surface keeps these as separate questions — never collapsed into one score.
+
+## Synthetic plus human research
+
+Synthetic research will not replace human respondents in every context. It will matter because teams have far more questions than they can afford to field.
+
+Use synthetic inference to:
+
+- prioritise what is worth testing before human fieldwork
+- explore follow-up questions between survey waves
+- get more value from respondent-level data after a study
+- compare concepts and messages quickly during strategy development
+
+Then use human research where it is strongest — when the decision turns on a level that needs a probability sample.
+
+The future is not synthetic versus human research. It is **synthetic plus human research**, with each used where it is strongest.
+
+## What you see in the product
+
+<Frame caption="Grounding in practice — a cohort is built from workspace datasets, with composition and precision visible.">
+  <img src="/images/app/cohort-builder.png" alt="Cohort builder showing population description, characteristics, and grounded respondent preview" />
 </Frame>
 
-## Traceable by design
+- A [cohort](/guides/cohorts) records which sources and characteristics built it, and which construction mode
+- A [simulation](/guides/simulations) records the cohort, sample, and real-world context of each run
+- Results report simulation precision alongside calibration status
+- For audit-grade microdata work, [respondent twins](/data/twins) bind personas one-to-one to real survey respondents
 
-Because personas are grounded in named sources, results are auditable:
+## Next
 
-- A [cohort](/guides/cohorts) records which datasets and characteristics it's built from.
-- A [simulation](/guides/simulations) records the cohort, the sample, and the real-world context of each run.
-- Verbatims and metrics carry the reasoning behind them, not just a score.
-
-<Note>
-  Grounding is what makes Simulant defensible in high-stakes work — campaigns, cabinets, and boardrooms — where a decision has to be explained, not just asserted.
-</Note>
-
-## Validation
-
-In a blind back-test, Simulant reproduced a national attitudes study — six months of fieldwork — in a single night. Where the simulated results diverged from the survey, follow-up found Simulant was closer to the truth.
-
-## Beyond cohorts: respondent twins
-
-For studies that need to stand up to audit — regulator submissions, published research, or extending a survey with new questions — you can bind a persona one-to-one to a real survey respondent. See [Respondent twins](/data/twins).
-
-<Card title="Add your own data" icon="upload" href="/data/datasets">
-  Ground the population in signal specific to your market.
-</Card>
+<CardGroup cols={2}>
+  <Card title="How cohorts are built" icon="microscope" href="/data/how-cohorts-are-built">
+    Targets, constrained generation, raking, and the scorecard.
+  </Card>
+  <Card title="Respondent twins" icon="link" href="/data/twins">
+    One-to-one models on survey microdata for audit-grade studies.
+  </Card>
+</CardGroup>

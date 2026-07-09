@@ -1,46 +1,85 @@
 ---
 title: "How cohorts are built"
-description: "The methodology behind Simulant cohorts — from population description to calibrated synthetic respondents."
-keywords: ["cohort", "methodology", "synthetic respondents", "generation", "calibration", "white paper"]
+description: "The Simulant methodology for generating synthetic survey panels — distributions first, individuals second."
+keywords: ["cohort", "methodology", "synthetic respondents", "generation", "calibration", "raking", "white paper"]
 ---
 
 A [cohort](/guides/cohorts) is not a prompt that roleplays your audience. It is a calibrated panel of synthetic respondents whose composition is fixed by official and academic statistics before any generative model is asked to speak.
 
-This page summarizes how that works. For the full technical specification — schema, sources, constrained generation, calibration, and contamination-controlled validation — read the white paper:
+> Distributions are deterministic, individuals are generative.
+
+Every population-level quantity in a Simulant panel is set by an official or academic statistical source before any language model is invoked. The model's role is confined to two narrow, schema-validated tasks: mapping a population description onto prepared statistical sources, and instantiating individual respondents *inside* externally fixed distributions.
+
+For the full technical specification — schema, sources, constrained generation, calibration, and contamination-controlled validation — read the white paper:
 
 <Card title="Generating synthetic survey respondents" icon="file-lines" href="https://simulant.tech/blog/generating-synthetic-respondents/">
-  The Simulant methodology for building synthetic survey panels.
+  Technical white paper: the full pipeline for building synthetic survey panels.
 </Card>
 
 ## Two audience modes
 
 Simulant builds audiences in two ways, and they carry different evidence:
 
-| Mode | What it means | When to use it |
-|------|----------------|----------------|
-| **Respondent-backed** | Each persona is anchored to a real respondent record from survey microdata on the platform | Highest-evidence mode wherever suitable microdata exists |
-| **Generated** | Respondents are created inside externally fixed distributions from census, election, survey, and polling sources | When no respondent-level dataset covers the population you need |
+| Mode | What it means | Evidence |
+|------|----------------|----------|
+| **Respondent-backed** | Each simulated respondent is anchored to a real respondent record from survey microdata on the platform | Highest-evidence mode — composition and attitudinal structure come from measured people |
+| **Generated** | Respondents are created inside externally fixed distributions from census, election, survey, and polling sources | Used when no respondent-level dataset covers the population you need |
 
 Every cohort discloses which mode built it. A generated panel and a respondent-backed one are never presented as equally grounded.
 
-## Distributions first, individuals second
+## The error model
 
-The organising principle: **distributions are deterministic, individuals are generative.**
+Synthetic estimates go wrong in two different ways, and conflating them is the central failure mode of the category:
 
-1. You describe the population in plain language in the [cohort builder](/guides/cohorts).
-2. Simulant maps that description onto prepared statistical sources and targets.
-3. Composition — age, region, education, income, and other spine fields — is set by those targets before any language model runs.
-4. Individual respondents are then instantiated *inside* those fixed distributions.
+| Term | What it is | How Simulant handles it |
+|------|------------|-------------------------|
+| **Simulation variance** | Spread of an estimate across regenerations of the same panel | Shrinks with effective sample size; reported as **simulation precision** (±pp), never as accuracy |
+| **Systematic bias** | Gap between what the model produces on average and what the population thinks | Does not shrink with `n`; measured against external ground truth |
 
-That split matters. Compositional bias (the wrong people) is driven toward zero by targeting and raking. Response bias (the right people answering wrongly) is measured against external ground truth — never assumed away.
+Systematic bias decomposes further:
+
+- **Compositional bias** — the panel contains the wrong people. Targeting and raking drive this toward zero by construction.
+- **Response bias** — the right people answer wrongly. Only validation against external ground truth can bound this.
+
+**Representativeness is not validity.** A panel can match every demographic target and still answer wrongly. Composition and response behaviour are different properties controlled by different machinery. Every result surface in the product keeps that distinction visible.
+
+## The pipeline (excerpt)
+
+The generated-mode pipeline has three stages. This is a summary of the method in the [white paper](https://simulant.tech/blog/generating-synthetic-respondents/); the paper is the authoritative specification.
+
+### Stage A — target specification
+
+You describe the population in plain language. Simulant maps that description onto a deterministic menu of prepared statistical sources — census marginals, survey microdata, election results, published pollster tabs — and produces a **TargetSpec**: the complete statistical contract for the panel.
+
+Per spine dimension, the TargetSpec stores a target distribution, selected joint targets, provenance tag (`census`, `survey`, `election`, `pollster`, `research`, or `user_quota`), citations, and data vintage. The spec is persisted on the panel as an immutable audit object.
+
+### Stage B — constrained generation
+
+Respondents are generated in batches under simultaneous constraints:
+
+1. **Decode-time enum enforcement** — country codebooks are compiled into the model's response schema, so out-of-vocabulary labels are impossible
+2. **Running quota tallies** — later batches correct earlier drift rather than compounding it
+3. **Donor exemplars** — where microdata covers the population, anonymised matching respondents anchor generation
+4. **Cross-field consistency rules** — impossible combinations (age–education, tenure–household) are excluded
+5. **Diversity screening** — near-duplicates and mode collapse are measured and regenerated within bounds
+
+### Stage C — validation, raking, scorecard
+
+Every value is codebook-validated. Weights are calibrated by iterative proportional fitting (raking) so the weighted panel matches TargetSpec margins — on a restricted set of core demographics plus selected two-way interactions, not the full spine (which would produce degenerate weights on a 500–2,000-row panel).
+
+A **representativeness scorecard** is persisted with every panel: per-dimension target vs achieved, joint total variation distance, Kish effective sample size, design effect, worst-case precision, diversity metrics, rake diagnostics, and provenance. Panels that miss named thresholds flag themselves rather than completing silently.
+
+## Precision reporting
+
+Every question-level result reports interval estimates from the *weighted effective* sample size, not raw `n`. These figures are labelled as **simulation precision**, never as accuracy — they bound regeneration variance only. Product surfaces pair every precision figure with the panel's calibration status, so “how stable is this number” and “how right is this number” are visibly different facts.
 
 ## What you see in the product
 
 When you [build a cohort](/guides/cohorts), the builder and Deep Research report make the method visible:
 
-- **Population description** — the plain-language brief Simulant interprets into structured filters
-- **Region and demographics** — the hard constraints on who can appear in the panel
-- **Characteristics** — attitudes and dispositions grounded in source data, not invented labels
+- **Population description** — the plain-language brief mapped onto structured filters
+- **Region and demographics** — hard constraints on who can appear in the panel
+- **Characteristics** — attitudes grounded in source data, not invented labels
 - **Size and precision** — how many respondents you draw and the implied ±pp
 - **Report** — a sourced narrative about who the audience is and what moves them
 
@@ -48,19 +87,23 @@ When you [build a cohort](/guides/cohorts), the builder and Deep Research report
   <img src="/images/app/cohort-report.png" alt="Cohort report tab showing a long Deep Research narrative about Suburban Swing Voters" />
 </Frame>
 
-## Representativeness is not validity
+## Known limits (stated plainly)
 
-A panel can match every demographic target and still answer wrongly. Composition and response behaviour are different properties controlled by different machinery. Simulant keeps that distinction visible on every result surface: composition is controlled; response validity is measured.
+From the white paper — a methodology that hides its failure modes is marketing:
 
-For how this connects to simulation design and validation, see [How grounding works](/data/grounding) and the companion paper on [synthetic research methodology](https://simulant.tech/blog/synthetic-research-methodology/).
+- Response bias is bounded only where validated; unvalidated domains carry no accuracy claim
+- Model priors skew educated, urban, and discursively online — that is why targets are deterministic
+- Don't-know and response-style effects are not yet fully modelled
+- Rare cells are fragile; per-cell power floors bound but do not eliminate this
+- **Point estimates for high-stakes decisions belong in real fieldwork.** Synthetic panels are for iteration, exploration, framing comparisons, and segment stress-testing — a complement to probability-sample polling, not a substitute where the decision turns on a level
 
 ## Next
 
 <CardGroup cols={2}>
+  <Card title="How grounding works" icon="database" href="/data/grounding">
+    Why synthetic research is an inference layer on observed evidence — not AI roleplay.
+  </Card>
   <Card title="Build a cohort" icon="users" href="/guides/cohorts">
     Create an audience in the product.
-  </Card>
-  <Card title="How grounding works" icon="database" href="/data/grounding">
-    Why every response traces back to the record.
   </Card>
 </CardGroup>

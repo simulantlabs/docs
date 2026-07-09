@@ -14,10 +14,10 @@ Simulant has a small set of objects that build on each other. Understanding how 
 
 <Steps>
   <Step title="Datasets ground the population">
-    A **dataset** is a source of real-world signal — census figures, electoral studies, panels, or your own uploaded data. Personas are built from datasets, so every response can be traced back to evidence.
+    A **dataset** is a source of observed human evidence — census figures, electoral studies, survey microdata, or your own uploaded data. The empirical foundation is the human record; the language model is not.
   </Step>
   <Step title="Cohorts define who you're reaching">
-    A **cohort** is a defined audience — described in plain language, narrowed by region, demographics, and characteristics, and sized to a target precision. It has a respondent count (`n`).
+    A **cohort** is a calibrated panel — respondent-backed (anchored to real microdata) or generated inside externally fixed distributions. Composition is set before any generative step runs. It reports respondent count (`n`) and simulation precision.
   </Step>
   <Step title="Assets are what you put in front of them">
     An **asset** is the thing being reacted to — a video, an image, or a block of copy. Assets live under **Library → Assets**.
@@ -62,7 +62,11 @@ Poll steps return **weighted shares** — the fielded percentages a traditional 
 
 ## Grounding
 
-Simulant models outcomes, not opinions. Personas are built from the measurable record, and every result traces back to the signals behind it — so the read-out survives the room, the audit, and the front page. See [How grounding works](/data/grounding).
+Synthetic research should not be AI roleplay. It should be a rigorous inference layer on observed human evidence.
+
+**Distributions are deterministic, individuals are generative.** Composition is fixed by official and academic statistics before any language model runs. Representativeness is not validity — a panel can match every demographic target and still answer wrongly, so composition and response behaviour are controlled and reported separately.
+
+See [How grounding works](/data/grounding) and [How cohorts are built](/data/how-cohorts-are-built). For the full specifications, read the white papers on [synthetic research methodology](https://simulant.tech/blog/synthetic-research-methodology/) and [generating synthetic survey respondents](https://simulant.tech/blog/generating-synthetic-respondents/).
 
 <Card title="Ready to build?" icon="rocket" href="/guides/simulations">
   Start by creating your first simulation.
