@@ -1,26 +1,22 @@
 ---
-title: "Test steps"
-description: "Add a test step to a simulation — set up variants, audience, context, metrics, and questions, then read the results."
-keywords: ["test", "ab test", "creative testing", "message testing", "results", "verbatims"]
+title: "Tests"
+description: "Save reusable test instruments in the Library, then load them onto a simulation to measure reactions to creative or messaging."
+keywords: ["test", "ab test", "creative testing", "message testing", "results", "verbatims", "library"]
 ---
 
-A **test step** measures how a cohort reacts to creative or messaging. It lives inside a [simulation](/guides/simulations) on the Model canvas — not as a standalone page. Add a **Test** node, wire it to a **Cohort** (and optionally **Asset**) node, and configure the step in the node panel.
+A **test** is a reusable instrument you save under **Library → Tests**. Load it onto a [simulation](/guides/simulations) as a **Test** step to measure how a cohort reacts to creative or messaging — with variants, metrics, and verbatims.
 
-<Frame caption="The Simulations hub — tests appear as steps within each simulation, alongside polls and focus groups.">
-  <img src="/images/app/tests-list.png" alt="Simulations list showing studies with test steps and their statuses" />
+<Frame caption="Library → Tests — reusable creative and messaging tests ready for the canvas.">
+  <img src="/images/app/tests-list.png" alt="Tests library listing Cost-of-Living, Healthcare, and Tax Relief instruments" />
 </Frame>
 
-## Add a test step
+## Create a library test
 
-Open a simulation's **Model** tab and click **Add node → Test**. Select the node to open its configuration panel.
-
-<Frame caption="The Model canvas — a test step wired to a cohort, with a focus group step downstream.">
-  <img src="/images/app/test-builder.png" alt="Simulation model canvas with cohort, test, and focus group nodes spaced and connected" />
-</Frame>
+Go to **Library → Tests → New test**. Configure the design fields that travel with the instrument:
 
 ### Identity
 
-Name the test and state a **hypothesis** — what you expect to happen and why. Stating it up front keeps the read-out honest and gives you something to check the result against.
+Name the test and state a **hypothesis** — what you expect to happen and why.
 
 ### Creative
 
@@ -30,37 +26,7 @@ Choose the format:
 - **Image** — react to a static asset.
 - **Messaging** — react to copy you type or upload.
 
-Add **variants** to compare options side by side — up to four, labelled A through D. Attach an asset or message to each. See [Assets](/guides/creatives).
-
-### Audience
-
-Wire the test to a **Cohort** node on the canvas. Every variant is shown to the same audience, so differences in the result come from the creative, not the crowd. See [Build a cohort](/guides/cohorts).
-
-### What do your respondents know?
-
-Every test is anchored to a shared world state and a specific body of knowledge, so a run can be reconstructed and validated later. Set both in the **What do your respondents know?** section.
-
-**World state.** Pick the real-world environment the population is reacting within:
-
-- **Neutral** — strip out context for a clean baseline. Non-blocking default.
-- **Current** — today's prevailing issues, mood, and events.
-- **Custom** — specify the **issues**, **mood**, **events**, and **competitive** pressure yourself.
-
-Under **Custom** you can also wire a **News** node with up to four articles. The selected articles are passed to every persona so their reactions reflect what your audience has actually been reading this week.
-
-**Specific knowledge.** Add what respondents should know about the people, events, or products your creative and questions reference. Wire a **Knowledge** node or type facts directly. Without this, respondents default to what an average member of the cohort would plausibly know — which usually isn't the specifics of your brand, candidate, or launch.
-
-Select **Check references** to scan your questions and creative for named people and events. Simulant surfaces each one as a suggestion; for every suggestion you can:
-
-- **Write it myself** — type the neutral facts respondents should treat as given.
-- **Draft with research** — get a short, neutral factual draft in the editable field. Review it for accuracy and neutrality, edit as needed, then accept.
-- **Ignore** — dismiss the suggestion.
-
-Nothing is stored until you accept an item. Accepted items are saved with the test, tagged as **manual** or **research-assisted**, and used verbatim on every run — Simulant never re-fetches or updates them between runs.
-
-<Tip>
-  Neutral world state is compatible with specific knowledge — use it when you want a clean baseline reaction to a named subject respondents wouldn't otherwise recognize.
-</Tip>
+Add **variants** to compare options side by side — up to four, labelled A through D. Attach an asset or message to each when you place the test on a canvas. See [Assets](/guides/creatives).
 
 ### Metrics
 
@@ -68,90 +34,41 @@ Select the quantitative measures you want scored, such as **Recall**, **Sentimen
 
 ### Questions
 
-Add the questions each persona answers. Question types include:
+Add the questions each persona answers — open-ended, rating, or multiple choice. A good test mixes a few open-ended prompts with structured ratings.
 
-- **Open-ended** — free-text responses that become verbatims.
-- **Rating 1–5** — a numeric scale.
-- **Multiple choice** — fixed options you define.
+## Use a test in a simulation
 
-Drag to reorder questions. A good test mixes a few open-ended prompts with structured ratings.
+On a simulation's **Model** tab, click **Add node → Test**. Load a library test or configure from scratch. Wire:
 
-### Panel and behavior
+- A **Cohort** node for respondents
+- An **Asset** node for each variant (optional for messaging)
+- Optional **Knowledge** / **News** for context
 
-Tune how the run executes:
-
-- **Sample size** — how many personas to draw from the cohort (capped at the cohort's `n`), or **Max**.
-- **Include control baseline** — score the same panel *unexposed* alongside each variant so every metric reads as **lift vs control**, not just an absolute score. On by default. See [Control baseline and lift](#control-baseline-and-lift).
-- **Randomize** — vary the order variants are shown to reduce order bias.
-- **Attention checks** — include checks that keep responses honest.
-- **Agent behavior** — toggles such as allowing **refusals**, requiring **grounded** answers, capturing **verbatims**, and probing with **adversarial** follow-ups.
-
-<Note>
-  Turning the control baseline on adds one extra arm to the run, so the response and credit estimate in the live panel goes up accordingly.
-</Note>
-
-### Control baseline and lift
-
-When **Include control baseline** is on, Simulant scores an extra arm called the **control**: the same respondents from your cohort, evaluated *without* seeing any creative. Every variant is then compared to that unexposed baseline on a per-respondent basis, so the read-out is paired lift rather than absolute scores that drift with panel composition.
-
-Use control baseline when you want to know:
-
-- Whether a creative actually *moves* the audience versus how they already felt.
-- Which variant produces the biggest lift, not just the highest raw score.
-- Where lift concentrates by segment — a variant can win overall while flat-lining the audience you care about.
-
-Turn it off only when you need to keep runs as cheap as possible and absolute scores are enough — for example, quick smoke checks on early drafts.
-
-## Run it
-
-Click **Run simulation** in the simulation header. The builder shows an **estimate** on each step node — the number of LLM calls the run will make, an approximate runtime, the count of verbatims to expect, and the credits it will consume.
-
-<Note>
-  Run time scales with sample size, number of variants, and question count. Larger panels take longer but tighten the confidence of the quantitative measures.
-</Note>
-
-## Read the results
-
-Open the simulation's **Results** tab, select a run, and click the test step to see:
-
-- **Headline metrics** — recall, sentiment, intent, and clarity, each scored out of 100 against a benchmark. When a control baseline was run, each metric also shows its **vs control** delta.
-- **Confidence panel** — completion rate, effective sample size, paired-persona counts per variant, and the weighting basis behind the numbers, so you can judge how much to lean on a result.
-- **Lift vs control** — a table of every metric with the control baseline shown struck through and each variant's signed lift beside it. Positive lift means the creative moved the panel; negative means it moved them the wrong way.
-- **Sentiment by segment** — where the creative resonates and where it falls flat, split positive / neutral / negative, with per-segment lift when a control was run.
-- **Verbatims** — what individual personas said, filterable by tone. Read the reasoning, not just the score.
-- **Themes** — verbatims clustered into the patterns that recur across the panel.
-- **Recommendations** — the actions the result points to.
-
-<Note>
-  Simulant scores tests with real persona reactions across the whole filtered panel — every persona answers, and the metrics are weighted from those individual responses. If a run couldn't reach the panel (for example, an upstream outage), the result falls back to an estimated score and is flagged as such in the confidence panel.
-</Note>
-
-<Frame caption="Test step results — headline metrics, sentiment by segment, and verbatims you can filter by tone.">
-  <img src="/images/app/test-results.png" alt="Test results showing recall, sentiment, intent, clarity, segment breakdown, and voter verbatims" />
+<Frame caption="The Model canvas — a test step wired to a cohort, with a focus group step downstream.">
+  <img src="/images/app/test-builder.png" alt="Simulation model canvas with cohort, test, and focus group nodes connected" />
 </Frame>
 
-Switch to the **Themes** tab to see those verbatims grouped into the patterns that recur across the panel.
+Audience, world state, and run-time overlays stay on the canvas step. Design fields resolve from the library instrument at run time when linked.
 
-<Frame caption="The Themes tab clusters verbatims into the patterns that recur across the panel.">
-  <img src="/images/app/test-themes.png" alt="Themes view showing recurring patterns such as cost-of-living resonance and doubts about funding" />
+## Read results
+
+Open the simulation's **Results** tab, select a run, and open the test step:
+
+- Headline metrics (recall, sentiment, intent, clarity)
+- Segment cuts and lift vs control
+- Verbatims, themes, and recommendations
+
+<Frame caption="A sample test result — metrics, segment cuts, and verbatims from one run.">
+  <img src="/images/app/test-results.png" alt="Test results showing recall, sentiment, intent, clarity, and verbatims" />
 </Frame>
-
-Use **Share** to bring in teammates or **Export** to take the results into a deck or report.
-
-<Tip>
-  Comparing variants? Look past the headline number to the segment cuts and themes — a variant that wins overall can still lose the audience you actually care about.
-</Tip>
 
 ## Next
 
 <CardGroup cols={2}>
-  <Card title="Add a poll step" icon="square-check" href="/guides/polls">
-    Field a short questionnaire — no creative, no variants.
+  <Card title="Create a simulation" icon="flask" href="/guides/simulations">
+    Wire your test into a full research flow.
   </Card>
-  <Card title="Add a focus group step" icon="messages-square" href="/guides/focus-groups">
-    Hear the same cohort deliberate in conversation.
-  </Card>
-  <Card title="Schedule a report" icon="file-chart-column" href="/guides/reports">
-    Surface patterns across every simulation you run.
+  <Card title="Upload an asset" icon="clapperboard" href="/guides/creatives">
+    Add the creative a test reacts to.
   </Card>
 </CardGroup>

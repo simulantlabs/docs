@@ -1,64 +1,48 @@
 ---
-title: "Focus group steps"
-description: "Add a focus group step to a simulation — convene a room from any cohort and watch it deliberate, react, and shift its mind in conversation."
-keywords: ["focus group", "deliberation", "moderator", "qualitative", "room"]
+title: "Focus groups"
+description: "Save reusable discussion guides in the Library, then load them onto a simulation to watch a room deliberate."
+keywords: ["focus group", "deliberation", "moderator", "qualitative", "room", "library"]
 ---
 
-A **focus group step** convenes a small room of personas from a cohort and lets them talk. It lives inside a [simulation](/guides/simulations) on the Model canvas. Where a [test step](/guides/tests) collects reactions across the whole population, a focus group step shows you how a handful of people reason together — where they agree, where they push back, and what changes their mind.
+A **focus group** is a reusable discussion guide you save under **Library → Focus groups**. Load it onto a [simulation](/guides/simulations) as a **Focus group** step to convene a small room from a cohort and watch it deliberate, react, and shift its mind.
 
-<Frame caption="The Simulations hub — focus groups appear as steps within multi-step simulations.">
-  <img src="/images/app/focus-groups-list.png" alt="Simulation results tab showing runs with poll, test, and focus group steps" />
+Where a [test](/guides/tests) collects reactions across the whole population, a focus group shows how a handful of people reason together.
+
+<Frame caption="Library → Focus groups — reusable discussion guides ready for the canvas.">
+  <img src="/images/app/focus-groups-list.png" alt="Focus groups library listing Cost-of-Living and Healthcare rooms" />
 </Frame>
 
-## Add a focus group step
+## Create a library focus group
 
-On a simulation's **Model** tab, click **Add node → Focus group** and open the node panel.
+Go to **Library → Focus groups → New focus group**. Set the design fields:
 
-<Frame caption="The Model canvas — a focus group step wired to a cohort and optional asset node.">
-  <img src="/images/app/focus-group-builder.png" alt="Simulation model canvas with a focus group node connected to a cohort and asset" />
+- **Name** and **objective** — what you want to learn
+- **Moderator style** — warm and curious, neutral and probing, or challenging
+- **Discussion prompts** — the questions the moderator works through
+- **Length** and **participant count** — typically 45 minutes and 5–8 people
+- **Dynamics** — crosstalk, dissent, anonymous, summary
+
+Audience and asset attachments are set when you place the focus group on a simulation canvas.
+
+## Use a focus group in a simulation
+
+On a simulation's **Model** tab, click **Add node → Focus group**. Load a library guide or configure from scratch. Wire a **Cohort** for respondents and optionally an **Asset** for the room to react to.
+
+<Frame caption="The Model canvas — a focus group step wired downstream of a test.">
+  <img src="/images/app/focus-group-builder.png" alt="Simulation model canvas with cohort, test, and focus group nodes connected" />
 </Frame>
 
-<Steps>
-  <Step title="Name it and set the objective">
-    Give the group a name and a sharp **discussion objective** — what you want to learn. The objective keeps the moderator on track.
-  </Step>
-  <Step title="Choose a moderator">
-    Pick an **AI moderator**, which runs instantly and probes every participant consistently, or a **Human moderator** to steer the room live. For the AI moderator, choose a style such as `probing`.
-  </Step>
-  <Step title="Attach an asset (optional)">
-    Wire an **Asset** node to have the room react to a video, image, or message. See [Assets](/guides/creatives).
-  </Step>
-  <Step title="Write discussion prompts">
-    Add the questions the moderator works through, and drag to reorder them. Open, specific prompts spark the best discussion.
-  </Step>
-  <Step title="Pick the room">
-    Wire the step to a **Cohort** node, then select participants from its roster. Five to eight participants is the sweet spot — big enough for real dynamics, small enough to follow.
-  </Step>
-  <Step title="Set length and dynamics">
-    Choose a session **length** (for example, `45 min`) and toggle group **dynamics**: allow **crosstalk**, encourage **dissent**, run **anonymous**, and generate a **summary**.
-  </Step>
-</Steps>
+## Read the room
 
-## Run it
+After you **Run simulation**, open the **Results** tab and select the focus group step. You'll see the moderated transcript, participant shifts, and a summary of where the room landed.
 
-Click **Run simulation** in the simulation header. The moderator opens with your first prompt and the participants respond, react to each other, and work toward — or away from — consensus.
+## Next
 
-<Frame caption="A focus group readout — the moderated transcript with live sentiment, participants, and emerging themes.">
-  <img src="/images/app/focus-group-room.png" alt="Focus group results showing a moderated transcript, participant list, and live sentiment" />
-</Frame>
-
-## Read the discussion
-
-Open the simulation's **Results** tab, select a run, and click the focus group step to follow:
-
-- **The transcript** — the full back-and-forth, attributed to each participant.
-- **Shifts** — where a participant changes position, and what moved them.
-- **Summary** — the throughline of the conversation, the points of agreement, and the live dissent.
-
-<Tip>
-  Run a focus group step after a test step in the same simulation to understand the *why* behind a surprising number. Wire both steps to the same cohort node so the room reflects the population you just measured.
-</Tip>
-
-<Card title="Back to test steps" icon="flask" href="/guides/tests">
-  Measure the reaction across the whole population.
-</Card>
+<CardGroup cols={2}>
+  <Card title="Create a simulation" icon="flask" href="/guides/simulations">
+    Add the focus group as a step on the Model canvas.
+  </Card>
+  <Card title="Build a cohort" icon="users" href="/guides/cohorts">
+    Define the audience the room is drawn from.
+  </Card>
+</CardGroup>

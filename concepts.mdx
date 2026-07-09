@@ -1,13 +1,13 @@
 ---
 title: "Core concepts"
-description: "The building blocks of Simulant — workspaces, simulations, datasets, cohorts, assets, and steps — and how they fit together."
-keywords: ["concepts", "simulation", "cohort", "test", "focus group", "creative", "dataset", "workspace"]
+description: "The building blocks of Simulant — workspaces, simulations, datasets, cohorts, assets, and library instruments — and how they fit together."
+keywords: ["concepts", "simulation", "cohort", "test", "focus group", "asset", "dataset", "workspace", "library"]
 ---
 
 Simulant has a small set of objects that build on each other. Understanding how they relate makes everything else in these docs straightforward.
 
-<Frame caption="The Model canvas brings the object model together — cohorts, assets, and research steps wired into a single simulation.">
-  <img src="/images/app/test-builder.png" alt="Simulation model canvas with poll, test, and focus group nodes connected to a cohort" />
+<Frame caption="The Model canvas brings the object model together — cohorts and research steps wired into a single simulation.">
+  <img src="/images/app/test-builder.png" alt="Simulation model canvas with cohort, test, and focus group nodes connected" />
 </Frame>
 
 ## The object model
@@ -20,10 +20,13 @@ Simulant has a small set of objects that build on each other. Understanding how 
     A **cohort** is a defined audience — described in plain language, narrowed by region, demographics, and characteristics, and sized to a target precision. It has a respondent count (`n`).
   </Step>
   <Step title="Assets are what you put in front of them">
-    An **asset** is the thing being reacted to — a video, an image, or a block of copy. Assets live in the **Library** section of the sidebar (the route is still `/creatives`).
+    An **asset** is the thing being reacted to — a video, an image, or a block of copy. Assets live under **Library → Assets**.
+  </Step>
+  <Step title="Library instruments are reusable designs">
+    **Polls**, **Tests**, and **Focus groups** in the Library are reusable instruments. Save a questionnaire or discussion guide once, then load it onto any simulation's Model canvas.
   </Step>
   <Step title="Simulations compose the research">
-    A **simulation** is a container for your study. On the **Model** canvas you add **steps** — **Poll**, **Test**, and **Focus group** nodes — and wire them to cohorts, assets, and context. One simulation can mix all three step types.
+    A **simulation** is a container for your study. On the **Model** canvas you add **steps** — Poll, Test, and Focus group nodes — and wire them to cohorts, assets, and context. One simulation can mix all three step types.
   </Step>
 </Steps>
 
@@ -32,13 +35,15 @@ Simulant has a small set of objects that build on each other. Understanding how 
 | Object | What it is | Where it lives |
 |--------|------------|----------------|
 | **Workspace** | The shared space for your team's work, data, and billing | Workspace switcher, top-left |
-| **Simulation** | A composed study with polls, tests, and focus groups as steps | **Simulations** |
+| **Simulation** | A composed study with polls, tests, and focus groups as steps | **Research → Simulations** |
 | **Step** | A single poll, test, or focus group inside a simulation | Simulation **Model** tab |
-| **Dataset** | A source of grounding data, versioned with a schema | **Datasets** |
-| **Cohort** | A defined, sampled audience | **Cohorts** |
-| **Asset** | A media asset or copy to test | **Assets** |
-| **Report** | A scheduled or on-demand brief across recent runs | **Reports** |
-| **Memo** | A personal or workspace note alongside your research | **Memos** |
+| **Dataset** | A source of grounding data, versioned with a schema | **Library → Datasets** |
+| **Cohort** | A defined, sampled audience | **Library → Cohorts** |
+| **Asset** | A media asset or copy to test | **Library → Assets** |
+| **Poll / Test / Focus group** | A reusable instrument design | **Library → Polls / Tests / Focus groups** |
+| **Report** | A scheduled or on-demand brief across recent runs | **Intelligence → Reports** |
+| **Memo** | A personal or workspace note alongside your research | **Intelligence → Memos** |
+| **Agent** | Plain-language Q&A across your workspace | **Intelligence → Agent** |
 
 ## Workspaces
 

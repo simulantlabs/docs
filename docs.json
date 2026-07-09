@@ -38,28 +38,33 @@
         ]
       },
       {
-        "group": "Build and run",
+        "group": "Research",
         "pages": [
-          "guides/simulations",
+          "guides/simulations"
+        ]
+      },
+      {
+        "group": "Library",
+        "pages": [
           "guides/cohorts",
+          "data/datasets",
           "guides/creatives",
-          "guides/tests",
           "guides/polls",
+          "guides/tests",
           "guides/focus-groups"
         ]
       },
       {
-        "group": "Analyze",
+        "group": "Intelligence",
         "pages": [
-          "guides/reports",
           "guides/agent",
+          "guides/reports",
           "guides/memos"
         ]
       },
       {
-        "group": "Data",
+        "group": "Methodology",
         "pages": [
-          "data/datasets",
           "data/how-cohorts-are-built",
           "data/grounding",
           "data/twins"
@@ -124,6 +129,10 @@
     {
       "source": "/guides/insights",
       "destination": "/guides/reports"
+    },
+    {
+      "source": "/data/feeds",
+      "destination": "/data/datasets"
     }
   ],
   "integrations": {
