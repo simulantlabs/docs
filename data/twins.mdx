@@ -7,7 +7,7 @@ keywords: ["respondent twin", "researchability", "validation", "calibration", "u
 A **respondent twin** is a persona bound one-to-one to a real person in a survey dataset. Where a general cohort persona is drawn from population statistics, a twin carries a specific respondent's answers, their survey weight, and the missingness of their record. That gives you a research surface built directly on **microdata** — real people's real answers — with a defensible read-out on top.
 
 <Note>
-  Respondent twins are an **early-access** capability alongside the standard [tests](/guides/tests) flow. Twin studies live under **Simulations → Twin studies** in the app. Contact [support@simulant.tech](mailto:support@simulant.tech) if you need them enabled for your workspace.
+  Respondent twins are an **early-access** capability alongside the standard [simulation](/guides/simulations) flow. Twin studies are accessed from dataset detail pages for microdata imports. Contact [support@simulant.tech](mailto:support@simulant.tech) if you need them enabled for your workspace.
 </Note>
 
 ## When to use twins
@@ -46,11 +46,11 @@ For creative, message, and concept testing keep using [Tests](/guides/tests) —
 
 ## Run a twin study
 
-Twin studies live under **Simulations → Twin studies** in the app. Each study reuses a **twin version** built from a dataset, so once a dataset is imported you only need to pick it — Simulant provisions the twin cores and embedding index behind the scenes.
+Twin studies are created from imported microdata datasets in your workspace. Once a dataset with an active twin version is available, you can field studies against it.
 
 ### Build
 
-Go to **Twin studies → New twin study**. Work down the builder:
+Go to the dataset's detail page and start a **New twin study**. Each study reuses a **twin version** built from that dataset — Simulant provisions the twin cores and embedding index behind the scenes.
 
 - **Name** the study.
 - **Pick a twin dataset**. The list shows every dataset in your workspace that has an active twin version.
@@ -115,7 +115,7 @@ Every twin version can be held out and back-tested against the microdata it came
 
 ### Validation dashboard
 
-Open **Twin studies → Validation dashboard** to benchmark a dataset's twin version against the four baselines on leakage-guarded holdouts. Queue a run from any dataset and the dashboard polls while it works.
+Open the dataset's **Validation dashboard** to benchmark a twin version against the four baselines on leakage-guarded holdouts. Queue a run from any dataset and the dashboard polls while it works.
 
 Each benchmark reports every engine side by side on:
 

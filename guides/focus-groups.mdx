@@ -1,21 +1,21 @@
 ---
-title: "Run a focus group"
-description: "Convene a room from any cohort and watch it deliberate, react, and shift its mind in conversation."
+title: "Focus group steps"
+description: "Add a focus group step to a simulation — convene a room from any cohort and watch it deliberate, react, and shift its mind in conversation."
 keywords: ["focus group", "deliberation", "moderator", "qualitative", "room"]
 ---
 
-A **focus group** convenes a small room of personas from a cohort and lets them talk. Where a [test](/guides/tests) collects reactions across the whole population, a focus group shows you how a handful of people reason together — where they agree, where they push back, and what changes their mind.
+A **focus group step** convenes a small room of personas from a cohort and lets them talk. It lives inside a [simulation](/guides/simulations) on the Model canvas. Where a [test step](/guides/tests) collects reactions across the whole population, a focus group step shows you how a handful of people reason together — where they agree, where they push back, and what changes their mind.
 
-<Frame caption="The Focus groups view — live, scheduled, and completed rooms with their moderator, participants, and sentiment.">
-  <img src="/images/app/focus-groups-list.png" alt="Focus groups list showing voter deliberation rooms with AI and human moderators" />
+<Frame caption="The Simulations hub — focus groups appear as steps within multi-step simulations.">
+  <img src="/images/app/focus-groups-list.png" alt="Simulation results tab showing runs with poll, test, and focus group steps" />
 </Frame>
 
-## Create a focus group
+## Add a focus group step
 
-Go to **Focus groups → New focus group** and work down the builder.
+On a simulation's **Model** tab, click **Add node → Focus group** and open the node panel.
 
-<Frame caption="The focus group builder — set the objective, moderator, prompts, and seat participants from a cohort.">
-  <img src="/images/app/focus-group-builder.png" alt="Focus group builder for a voter reactions room with discussion prompts and a participant roster" />
+<Frame caption="The Model canvas — a focus group step wired to a cohort and optional asset node.">
+  <img src="/images/app/focus-group-builder.png" alt="Simulation model canvas with a focus group node connected to a cohort and asset" />
 </Frame>
 
 <Steps>
@@ -25,40 +25,40 @@ Go to **Focus groups → New focus group** and work down the builder.
   <Step title="Choose a moderator">
     Pick an **AI moderator**, which runs instantly and probes every participant consistently, or a **Human moderator** to steer the room live. For the AI moderator, choose a style such as `probing`.
   </Step>
-  <Step title="Attach a creative (optional)">
-    Turn on **test a creative** to have the room react to a video, image, or message. See [Creatives](/guides/creatives).
+  <Step title="Attach an asset (optional)">
+    Wire an **Asset** node to have the room react to a video, image, or message. See [Assets](/guides/creatives).
   </Step>
   <Step title="Write discussion prompts">
     Add the questions the moderator works through, and drag to reorder them. Open, specific prompts spark the best discussion.
   </Step>
   <Step title="Pick the room">
-    Choose the **cohort**, then select participants from its roster. Five to eight participants is the sweet spot — big enough for real dynamics, small enough to follow.
+    Wire the step to a **Cohort** node, then select participants from its roster. Five to eight participants is the sweet spot — big enough for real dynamics, small enough to follow.
   </Step>
   <Step title="Set length and dynamics">
     Choose a session **length** (for example, `45 min`) and toggle group **dynamics**: allow **crosstalk**, encourage **dissent**, run **anonymous**, and generate a **summary**.
   </Step>
 </Steps>
 
-## Launch the room
+## Run it
 
-Click **Launch room**. The moderator opens with your first prompt and the participants respond, react to each other, and work toward — or away from — consensus.
+Click **Run simulation** in the simulation header. The moderator opens with your first prompt and the participants respond, react to each other, and work toward — or away from — consensus.
 
-<Frame caption="A live focus group room — the moderated transcript on the left, with live sentiment, participants, and emerging themes on the right.">
-  <img src="/images/app/focus-group-room.png" alt="Live focus group room where voters react to a cost-of-living TV spot, with live sentiment and participant list" />
+<Frame caption="A focus group readout — the moderated transcript with live sentiment, participants, and emerging themes.">
+  <img src="/images/app/focus-group-room.png" alt="Focus group results showing a moderated transcript, participant list, and live sentiment" />
 </Frame>
 
 ## Read the discussion
 
-As the room runs you can follow:
+Open the simulation's **Results** tab, select a run, and click the focus group step to follow:
 
 - **The transcript** — the full back-and-forth, attributed to each participant.
 - **Shifts** — where a participant changes position, and what moved them.
 - **Summary** — the throughline of the conversation, the points of agreement, and the live dissent.
 
 <Tip>
-  Run a focus group after a test to understand the *why* behind a surprising number. Use the same cohort so the room reflects the population you just measured.
+  Run a focus group step after a test step in the same simulation to understand the *why* behind a surprising number. Wire both steps to the same cohort node so the room reflects the population you just measured.
 </Tip>
 
-<Card title="Back to tests" icon="flask" href="/guides/tests">
+<Card title="Back to test steps" icon="flask" href="/guides/tests">
   Measure the reaction across the whole population.
 </Card>

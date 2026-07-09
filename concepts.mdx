@@ -1,13 +1,13 @@
 ---
 title: "Core concepts"
-description: "The building blocks of Simulant — workspaces, datasets, cohorts, creatives, tests, and focus groups — and how they fit together."
-keywords: ["concepts", "cohort", "test", "focus group", "creative", "dataset", "workspace"]
+description: "The building blocks of Simulant — workspaces, simulations, datasets, cohorts, assets, and steps — and how they fit together."
+keywords: ["concepts", "simulation", "cohort", "test", "focus group", "creative", "dataset", "workspace"]
 ---
 
 Simulant has a small set of objects that build on each other. Understanding how they relate makes everything else in these docs straightforward.
 
-<Frame caption="A live focus group room brings the object model together — a cohort's participants reacting to a creative, with sentiment and themes forming in real time.">
-  <img src="/images/app/focus-group-room.png" alt="A focus group room where a voter cohort reacts to a campaign creative" />
+<Frame caption="The Model canvas brings the object model together — cohorts, assets, and research steps wired into a single simulation.">
+  <img src="/images/app/test-builder.png" alt="Simulation model canvas with poll, test, and focus group nodes connected to a cohort" />
 </Frame>
 
 ## The object model
@@ -17,13 +17,13 @@ Simulant has a small set of objects that build on each other. Understanding how 
     A **dataset** is a source of real-world signal — census figures, electoral studies, panels, or your own uploaded data. Personas are built from datasets, so every response can be traced back to evidence.
   </Step>
   <Step title="Cohorts define who you're reaching">
-    A **cohort** is a defined audience drawn from your datasets and narrowed with demographic filters and psychographic tags. It has a sample size (`n`).
+    A **cohort** is a defined audience — described in plain language, narrowed by region, demographics, and characteristics, and sized to a target precision. It has a respondent count (`n`).
   </Step>
-  <Step title="Creatives are what you put in front of them">
-    A **creative** is the thing being reacted to — a video, an image, or a block of copy.
+  <Step title="Assets are what you put in front of them">
+    An **asset** is the thing being reacted to — a video, an image, or a block of copy. Assets live in the **Library** section of the sidebar (the route is still `/creatives`).
   </Step>
-  <Step title="Tests, polls, and focus groups collect the reaction">
-    A **test** runs a structured study across the whole cohort. A **poll** fields a short questionnaire to a panel drawn from the cohort — vote intention, approval, top issues — with no creative involved. A **focus group** convenes a small room from the cohort to deliberate in conversation.
+  <Step title="Simulations compose the research">
+    A **simulation** is a container for your study. On the **Model** canvas you add **steps** — **Poll**, **Test**, and **Focus group** nodes — and wire them to cohorts, assets, and context. One simulation can mix all three step types.
   </Step>
 </Steps>
 
@@ -32,32 +32,33 @@ Simulant has a small set of objects that build on each other. Understanding how 
 | Object | What it is | Where it lives |
 |--------|------------|----------------|
 | **Workspace** | The shared space for your team's work, data, and billing | Workspace switcher, top-left |
+| **Simulation** | A composed study with polls, tests, and focus groups as steps | **Simulations** |
+| **Step** | A single poll, test, or focus group inside a simulation | Simulation **Model** tab |
 | **Dataset** | A source of grounding data, versioned with a schema | **Datasets** |
-| **Feed** | A stream of current news articles, usable as test context | **Feeds** |
 | **Cohort** | A defined, sampled audience | **Cohorts** |
-| **Creative** | A media asset or copy to test | **Creatives** |
-| **Test** | A structured study run across a cohort | **Tests** |
-| **Poll** | A fielded questionnaire returning weighted shares | **Polls** |
-| **Focus group** | A convened room that deliberates | **Focus groups** |
-| **Insight** | A pattern surfaced across many tests | **Insights** |
+| **Asset** | A media asset or copy to test | **Assets** |
+| **Report** | A scheduled or on-demand brief across recent runs | **Reports** |
+| **Memo** | A personal or workspace note alongside your research | **Memos** |
 
 ## Workspaces
 
-Everything you create belongs to a **workspace**. A workspace has its own datasets, cohorts, tests, members, plan, and billing. You can belong to more than one and switch between them with the switcher in the top-left of the sidebar. See [Members and roles](/workspace/members).
+Everything you create belongs to a **workspace**. A workspace has its own datasets, cohorts, simulations, members, plan, and billing. You can belong to more than one and switch between them with the switcher in the top-left of the sidebar. Open **Workspace settings** from the same menu to manage members, tags, and billing. See [Members and roles](/workspace/members).
 
 ## Quantitative and qualitative, together
 
-Every test returns both kinds of feedback:
+Every test step returns both kinds of feedback:
 
 - **Quantitative** — structured measures such as recall, sentiment, purchase intent, and clarity, scored out of 100 and cut by segment.
 - **Qualitative** — open-ended **verbatims** (what individual personas said and why), clustered into **themes**, with **recommendations** distilled on top.
 
-A [focus group](/guides/focus-groups) adds a third mode: watching a room reason and shift its position live.
+A [focus group step](/guides/focus-groups) adds a third mode: watching a room reason and shift its position live.
+
+Poll steps return **weighted shares** — the fielded percentages a traditional pollster would report — with margins of error and segment cuts.
 
 ## Grounding
 
 Simulant models outcomes, not opinions. Personas are built from the measurable record, and every result traces back to the signals behind it — so the read-out survives the room, the audit, and the front page. See [How grounding works](/data/grounding).
 
-<Card title="Ready to build?" icon="rocket" href="/guides/cohorts">
-  Start by building the cohort you want to reach.
+<Card title="Ready to build?" icon="rocket" href="/guides/simulations">
+  Start by creating your first simulation.
 </Card>

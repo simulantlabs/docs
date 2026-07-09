@@ -1,21 +1,21 @@
 ---
-title: "Run a test"
-description: "Test creative and messaging at population scale — set up variants, audience, context, metrics, and questions, then read the results."
+title: "Test steps"
+description: "Add a test step to a simulation — set up variants, audience, context, metrics, and questions, then read the results."
 keywords: ["test", "ab test", "creative testing", "message testing", "results", "verbatims"]
 ---
 
-A **test** runs a structured study across a whole cohort. Use it to pre-test creative, compare messages, or rehearse a launch — and get both the numbers and the reasoning behind them.
+A **test step** measures how a cohort reacts to creative or messaging. It lives inside a [simulation](/guides/simulations) on the Model canvas — not as a standalone page. Add a **Test** node, wire it to a **Cohort** (and optionally **Asset**) node, and configure the step in the node panel.
 
-<Frame caption="The Tests list — every study with its format, headline sentiment, and status at a glance.">
-  <img src="/images/app/tests-list.png" alt="Tests list showing campaign message tests with sentiment scores and statuses" />
+<Frame caption="The Simulations hub — tests appear as steps within each simulation, alongside polls and focus groups.">
+  <img src="/images/app/tests-list.png" alt="Simulations list showing studies with test steps and their statuses" />
 </Frame>
 
-## Build a test
+## Add a test step
 
-Go to **Tests → New test**. The builder is organized into sections; work down the form and use the live panel to preview your setup.
+Open a simulation's **Model** tab and click **Add node → Test**. Select the node to open its configuration panel.
 
-<Frame caption="The test builder — identity, creative, variants, and audience on the left with a live preview and estimate on the right.">
-  <img src="/images/app/test-builder.png" alt="Test builder for a cost-of-living TV spot with variants A and B and a Young Voters cohort selected" />
+<Frame caption="The Model canvas — a test step wired to a cohort and asset nodes, with configuration in the side panel.">
+  <img src="/images/app/test-builder.png" alt="Simulation model canvas with a test node connected to cohort and asset nodes" />
 </Frame>
 
 ### Identity
@@ -30,11 +30,11 @@ Choose the format:
 - **Image** — react to a static asset.
 - **Messaging** — react to copy you type or upload.
 
-Add **variants** to compare options side by side — up to four, labelled A through D. Attach a creative or message to each. See [Creatives](/guides/creatives).
+Add **variants** to compare options side by side — up to four, labelled A through D. Attach an asset or message to each. See [Assets](/guides/creatives).
 
 ### Audience
 
-Pick the **cohort** the test runs against, or create a new one inline. Every variant is shown to the same audience, so differences in the result come from the creative, not the crowd. See [Build a cohort](/guides/cohorts).
+Wire the test to a **Cohort** node on the canvas. Every variant is shown to the same audience, so differences in the result come from the creative, not the crowd. See [Build a cohort](/guides/cohorts).
 
 ### What do your respondents know?
 
@@ -46,9 +46,9 @@ Every test is anchored to a shared world state and a specific body of knowledge,
 - **Current** — today's prevailing issues, mood, and events.
 - **Custom** — specify the **issues**, **mood**, **events**, and **competitive** pressure yourself.
 
-Under **Custom** you can also attach up to four **news articles** from a [feed](/data/feeds). The selected articles are passed to every persona so their reactions reflect what your audience has actually been reading this week.
+Under **Custom** you can also wire a **News** node with up to four articles. The selected articles are passed to every persona so their reactions reflect what your audience has actually been reading this week.
 
-**Specific knowledge.** Add what respondents should know about the people, events, or products your creative and questions reference. Without this, respondents default to what an average member of the cohort would plausibly know — which usually isn't the specifics of your brand, candidate, or launch.
+**Specific knowledge.** Add what respondents should know about the people, events, or products your creative and questions reference. Wire a **Knowledge** node or type facts directly. Without this, respondents default to what an average member of the cohort would plausibly know — which usually isn't the specifics of your brand, candidate, or launch.
 
 Select **Check references** to scan your questions and creative for named people and events. Simulant surfaces each one as a suggestion; for every suggestion you can:
 
@@ -104,9 +104,7 @@ Turn it off only when you need to keep runs as cheap as possible and absolute sc
 
 ## Run it
 
-Before you launch, the builder shows an **estimate** — the number of LLM calls the run will make (panel size × variants), an approximate runtime, the count of verbatims to expect, and the credits it will consume. Use it to right-size a run before committing to it.
-
-Click **Run test**. Simulant questions every persona in the filtered panel and streams live per-persona progress into the results page as answers come back; you'll be notified when the run finishes. You can also **Save draft** to come back later.
+Click **Run simulation** in the simulation header. The builder shows an **estimate** on each step node — the number of LLM calls the run will make, an approximate runtime, the count of verbatims to expect, and the credits it will consume.
 
 <Note>
   Run time scales with sample size, number of variants, and question count. Larger panels take longer but tighten the confidence of the quantitative measures.
@@ -114,7 +112,7 @@ Click **Run test**. Simulant questions every persona in the filtered panel and s
 
 ## Read the results
 
-Open a finished test to see:
+Open the simulation's **Results** tab, select a run, and click the test step to see:
 
 - **Headline metrics** — recall, sentiment, intent, and clarity, each scored out of 100 against a benchmark. When a control baseline was run, each metric also shows its **vs control** delta.
 - **Confidence panel** — completion rate, effective sample size, paired-persona counts per variant, and the weighting basis behind the numbers, so you can judge how much to lean on a result.
@@ -128,8 +126,8 @@ Open a finished test to see:
   Simulant scores tests with real persona reactions across the whole filtered panel — every persona answers, and the metrics are weighted from those individual responses. If a run couldn't reach the panel (for example, an upstream outage), the result falls back to an estimated score and is flagged as such in the confidence panel.
 </Note>
 
-<Frame caption="Test results — headline metrics, sentiment by segment, and verbatims you can filter by tone.">
-  <img src="/images/app/test-results.png" alt="Test results for the cost-of-living spot showing recall, sentiment, intent, clarity, segment breakdown, and voter verbatims" />
+<Frame caption="Test step results — headline metrics, sentiment by segment, and verbatims you can filter by tone.">
+  <img src="/images/app/test-results.png" alt="Test results showing recall, sentiment, intent, clarity, segment breakdown, and voter verbatims" />
 </Frame>
 
 Switch to the **Themes** tab to see those verbatims grouped into the patterns that recur across the panel.
@@ -147,13 +145,13 @@ Use **Share** to bring in teammates or **Export** to take the results into a dec
 ## Next
 
 <CardGroup cols={2}>
-  <Card title="Run a poll" icon="square-check" href="/guides/polls">
+  <Card title="Add a poll step" icon="square-check" href="/guides/polls">
     Field a short questionnaire — no creative, no variants.
   </Card>
-  <Card title="Run a focus group" icon="messages-square" href="/guides/focus-groups">
+  <Card title="Add a focus group step" icon="messages-square" href="/guides/focus-groups">
     Hear the same cohort deliberate in conversation.
   </Card>
-  <Card title="Compare and track" icon="chart-line" href="/guides/insights">
-    Find patterns across every test you run.
+  <Card title="Schedule a report" icon="file-chart-column" href="/guides/reports">
+    Surface patterns across every simulation you run.
   </Card>
 </CardGroup>

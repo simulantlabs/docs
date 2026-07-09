@@ -1,39 +1,39 @@
 ---
-title: "Creatives"
-description: "Upload and manage the videos, images, and copy you test with Simulant."
-keywords: ["creative", "upload", "video", "image", "asset"]
+title: "Assets"
+description: "Upload and manage the videos, images, and copy your simulation steps test with Simulant."
+keywords: ["asset", "creative", "upload", "video", "image"]
 ---
 
-A **creative** is the asset a test or focus group reacts to. Creatives live in your workspace so you can reuse them across studies and variants.
+An **asset** is the media a test or focus group step reacts to. Assets live in your workspace under **Library → Assets** so you can reuse them across simulations and wire them into test nodes on the Model canvas.
 
-## Upload a creative
+## Upload an asset
 
-Go to **Creatives → Upload creative** and drop in your file, or click to browse. Uploads run in the background and show progress as they go.
+Go to **Assets → Upload asset** and drop in your file, or click to browse. Uploads run in the background and show progress as they go.
 
 Supported formats include:
 
-- **Video** — the most common creative for ad and hook testing.
+- **Video** — the most common asset for ad and hook testing.
 - **Image** — static ads, key art, packaging, and stills.
-- **Messaging** — headlines, captions, and body copy. You can upload a document or type copy directly in the test builder.
+- **Messaging** — headlines, captions, and body copy. You can upload a document or type copy directly in a test step.
 
 <Note>
-  Large video files are processed after upload so they play back smoothly in the app. A creative is ready to test once processing completes.
+  Large video files are processed after upload so they play back smoothly in the app. An asset is ready to test once processing completes and its status shows **Ready**.
 </Note>
 
-## Use a creative in a test
+## Use an asset in a simulation
 
-When you build a [test](/guides/tests) or [focus group](/guides/focus-groups), pick the format and attach a creative to each variant. To compare options, add up to four variants (A, B, C, D) and attach a different creative or message to each.
+On a simulation's **Model** tab, add a **Test** or **Focus group** step and connect an **Asset** node. To compare options, add up to four variants (A, B, C, D) and attach a different asset or message to each.
 
 For copy tests, choose the **Messaging** format and paste the headline, caption, or body text for each variant — no upload required.
 
-## Manage creatives
+## Manage assets
 
-Open **Creatives** to see every asset in the workspace, preview it, and see where it's been used. Reusing a creative across tests keeps your results comparable and your library tidy.
+Open **Assets** to see every file in the workspace, preview it, and see where it's been used. Reusing an asset across simulation steps keeps your results comparable and your library tidy.
 
-<Frame caption="The Creatives library — videos, audio, images, and documents with their processing and analysis status.">
-  <img src="/images/app/creatives.png" alt="Creatives library showing campaign ad assets with ready and analyzing status chips" />
+<Frame caption="The Assets library — videos, images, and documents with their processing status and tags.">
+  <img src="/images/app/creatives.png" alt="Assets library showing campaign ad assets with ready and analyzing status chips" />
 </Frame>
 
-<Card title="Next: run a test" icon="flask" href="/guides/tests">
-  Put a creative in front of a cohort and read the reaction.
+<Card title="Next: add a test step" icon="flask" href="/guides/tests">
+  Wire an asset into a simulation and read the reaction.
 </Card>

@@ -1,38 +1,41 @@
 ---
 title: "Build a cohort"
-description: "Define the audience you want to reach — from source data, demographic filters, and data-backed psychographic tags."
-keywords: ["cohort", "audience", "segment", "psychographics", "demographics"]
+description: "Define the audience you want to reach — with a plain-language population description, region, characteristics, and target precision."
+keywords: ["cohort", "audience", "segment", "psychographics", "demographics", "synthetic"]
 ---
 
-A **cohort** is the audience a test or focus group runs against. It's a slice of the grounded population, defined by the data it's built from and the filters you apply. Every cohort reports a sample size (`n`) so you always know how many personas stand behind a result.
+A **cohort** is the audience a simulation step runs against. It's a slice of the grounded population, defined by how you describe it and the filters you apply. Every cohort reports a respondent count (`n`) and an implied precision so you always know how many personas stand behind a result.
 
-<Frame caption="The Cohorts view — each audience with its age band, sample size, source count, and psychographic tags.">
-  <img src="/images/app/cohorts-list.png" alt="Cohorts list showing voter audiences such as Suburban Swing Voters and Rural Independents" />
+<Frame caption="The Cohorts view — each audience with its respondent count, status, and characteristics.">
+  <img src="/images/app/cohorts-list.png" alt="Cohorts list showing audiences such as Suburban Swing Voters and Senior Voters 60+" />
 </Frame>
 
 ## Create a cohort
 
-Go to **Cohorts → New cohort** and work down the builder. A live preview on the right shows the sample size and an example respondent as you refine.
+Go to **Cohorts → New cohort** and work down the builder. A preview panel on the right shows origin, status, and implied precision as you refine.
 
-<Frame caption="The cohort builder — toggle source datasets and apply filters while the preview shows the sample size and an example respondent.">
-  <img src="/images/app/cohort-builder.png" alt="Cohort builder for Suburban Swing Voters with source datasets and a sample respondent preview" />
+<Frame caption="The cohort builder — describe the population in plain language, set region and characteristics, and choose a target size.">
+  <img src="/images/app/cohort-builder.png" alt="Cohort builder with population description, region, demographics, characteristics, and cohort size presets" />
 </Frame>
 
 <Steps>
-  <Step title="Name your cohort">
-    Give it a name you'll recognize later, such as `Suburban Swing · Undecided`.
+  <Step title="Describe the population">
+    Under **Population**, write who you're trying to reach in plain language — for example, `Undecided suburban adults in Michigan swing counties worried about cost of living`. Simulant interprets the description into structured filters.
   </Step>
-  <Step title="Choose the source data">
-    Under **Source data**, toggle which datasets this cohort is built from. Turning a source off removes its signal from the personas. See [Datasets](/data/datasets).
+  <Step title="Set the region">
+    Narrow by **state or region**, or leave it open for a national cohort.
   </Step>
-  <Step title="Apply demographic filters">
-    Narrow the sample by **age range**, **gender**, **state or territory**, **income**, **household**, and **education**. Leave a filter as **Any** to keep it open.
+  <Step title="Apply demographics">
+    Refine by **age range**, **gender**, **income**, **household**, and **education**. Leave a filter as **Any** to keep it open.
   </Step>
-  <Step title="Add psychographic tags">
-    Select **data-backed tags** — attitudes and dispositions such as `Cost-of-living anxious` or `Climate-focused`. Tags are grounded in the source data, not guessed.
+  <Step title="Add characteristics">
+    Select **topic chips** under **Characteristics** — attitudes and dispositions such as `Cost-of-living anxious` or `Climate-focused`. Tags are grounded in source data, not guessed.
   </Step>
-  <Step title="Create the cohort">
-    Click **Create cohort**. It's now available to any test or focus group in the workspace.
+  <Step title="Choose cohort size">
+    Pick a size preset (500, 1,000, or 2,000) or adjust the slider. Simulant shows the implied precision (±pp) for each size.
+  </Step>
+  <Step title="Name and build">
+    Give the cohort a name under **Details**, then click **Build cohort**. Once status is **Ready**, it's available to wire into any simulation step.
   </Step>
 </Steps>
 
@@ -40,21 +43,33 @@ Go to **Cohorts → New cohort** and work down the builder. A live preview on th
   Keep cohorts focused. A tight, well-defined cohort produces sharper segment cuts than one broad audience — and you can always build several and compare them.
 </Tip>
 
-## Sample size
+## Cohort detail
 
-As you filter, Simulant shows the available sample size (`n`). When you run a test, you choose how many personas to draw from the cohort; the panel is capped at the cohort's total. Larger samples tighten the confidence of quantitative measures; smaller samples run faster.
+Open any cohort to browse three tabs:
+
+- **Respondents** — the prepared panel, with sortable columns and per-respondent detail
+- **Graph** — a 3D view of how respondents cluster
+- **Report** — a Deep Research report with sourced narrative about the cohort
+
+<Frame caption="A cohort Deep Research report — sourced narrative about who the audience is and what they care about.">
+  <img src="/images/app/cohort-report.png" alt="Cohort report tab showing a Deep Research narrative about Suburban Swing Voters" />
+</Frame>
+
+## Sample size and precision
+
+As you adjust size, Simulant shows the implied precision (±pp). When you run a step, you choose how many personas to draw from the cohort; the panel is capped at the cohort's total. Larger samples tighten the confidence of quantitative measures; smaller samples run faster.
 
 ## Editing and reusing cohorts
 
-Open any cohort from **Cohorts** to adjust its sources, filters, or tags and **Save changes**. Cohorts are reusable across tests and focus groups, which keeps results comparable — running two creatives against the same cohort is a clean like-for-like read.
+Open any cohort from **Cohorts** to adjust its description, filters, or size and **Save changes**. Cohorts are reusable across simulation steps — wire the same cohort node into multiple polls and tests to keep results comparable.
 
 ## Next
 
 <CardGroup cols={2}>
-  <Card title="Add a creative" icon="clapperboard" href="/guides/creatives">
-    Upload the asset you want this cohort to react to.
+  <Card title="Upload an asset" icon="clapperboard" href="/guides/creatives">
+    Add the creative a test step reacts to.
   </Card>
-  <Card title="Run a test" icon="flask" href="/guides/tests">
-    Put your cohort to work.
+  <Card title="Create a simulation" icon="flask" href="/guides/simulations">
+    Wire your cohort into a poll or test step.
   </Card>
 </CardGroup>

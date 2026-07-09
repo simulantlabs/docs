@@ -6,13 +6,13 @@ keywords: ["dataset", "data source", "upload", "public library", "schema"]
 
 A **dataset** is a source of real-world signal that grounds the personas in your workspace. Simulant ships with a public library so you can start immediately, and you can add your own data to sharpen the population around your market.
 
-<Frame caption="The Datasets view — workspace sources and the public library, with records and how each dataset feeds cohorts and tests.">
-  <img src="/images/app/datasets.png" alt="Datasets view showing a campaign's voter file, tracking poll, and public sources like the census" />
+<Frame caption="The Datasets view — workspace sources and the public library, with records and how each dataset feeds cohorts and simulations.">
+  <img src="/images/app/datasets.png" alt="Datasets view showing workspace sources and the Browse tab with public library datasets" />
 </Frame>
 
 ## The public library
 
-Every workspace can draw on Simulant's **public library** — a curated set of official, high-quality datasets covering population, attitudes, and behavior. Browse it under **Datasets → Add dataset → Public library**, then add a dataset to your workspace to make it available to cohorts. See [How grounding works](/data/grounding) for what's included.
+Every workspace can draw on Simulant's **public library** — a curated set of official, high-quality datasets covering population, attitudes, and behavior. Browse it under **Datasets → Browse**, then add a dataset to your workspace to make it available to cohorts. See [How grounding works](/data/grounding) for what's included.
 
 ## Add your own data
 
@@ -26,7 +26,7 @@ Go to **Datasets → Add dataset** and choose a source:
     Point Simulant at an API endpoint and provide an authorization token to pull records from an external system.
   </Step>
   <Step title="Add from the library">
-    Pick a dataset from the public library to add to your workspace.
+    Pick a dataset from the **Browse** tab to add to your workspace.
   </Step>
 </Steps>
 
@@ -48,7 +48,7 @@ Open any dataset to inspect its **schema** (the fields and their types), browse 
 
 ## Using datasets in cohorts
 
-Datasets don't shape a study on their own — you select which ones a [cohort](/guides/cohorts) is built from under **Source data**. Toggling a source on or off changes the signal behind that cohort's personas.
+Datasets ground the population behind [cohorts](/guides/cohorts). When you describe a cohort's population, Simulant draws on the datasets in your workspace to build synthetic respondents. You can also wire a **Dataset** node directly on a simulation's Model canvas.
 
 <Note>
   Your uploaded and connected datasets stay private to your workspace. Public library datasets are shared grounding available to everyone.

@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Local screenshot tooling (may contain auth tokens)
+scripts/.auth-state.json
+scripts/.chrome-docs-profile/
+scripts/_warmup.png
+
+# OS
+.DS_Store

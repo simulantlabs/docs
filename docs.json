@@ -40,6 +40,7 @@
       {
         "group": "Build and run",
         "pages": [
+          "guides/simulations",
           "guides/cohorts",
           "guides/creatives",
           "guides/tests",
@@ -50,15 +51,15 @@
       {
         "group": "Analyze",
         "pages": [
-          "guides/insights",
-          "guides/agent"
+          "guides/reports",
+          "guides/agent",
+          "guides/memos"
         ]
       },
       {
         "group": "Data",
         "pages": [
           "data/datasets",
-          "data/feeds",
           "data/grounding",
           "data/twins"
         ]
@@ -118,6 +119,12 @@
     ]
   },
   "description": "Simulant simulates human behaviour so you can make more informed policy and business decisions.",
+  "redirects": [
+    {
+      "source": "/guides/insights",
+      "destination": "/guides/reports"
+    }
+  ],
   "integrations": {
     "posthog": {
       "apiKey": "phc_qzykUcV8s5SeePatcERQwJry78vMGRZywgm3KkGgXVbk",

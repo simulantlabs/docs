@@ -1,14 +1,14 @@
 ---
-title: "Run a poll"
-description: "Field a poll to a representative synthetic panel — vote intention, approval, top issues — and read weighted results by segment."
+title: "Poll steps"
+description: "Add a poll step to a simulation — field a questionnaire to a representative synthetic panel and read weighted results by segment."
 keywords: ["poll", "polling", "vote intention", "approval", "survey", "panel"]
 ---
 
-A **poll** asks a representative panel a short set of questions and returns weighted, segmented results. Use it when you want the number a traditional pollster would give you — vote intention, approval, top issues, price sensitivity — without a creative, variants, or a control arm.
+A **poll step** asks a representative panel a short set of questions and returns weighted, segmented results. It lives inside a [simulation](/guides/simulations) on the Model canvas. Add a **Poll** node, wire it to a **Cohort** node, and configure the questions in the node panel.
 
-Where a [test](/guides/tests) measures reactions to something you put in front of the panel, a poll measures **what the panel already thinks**.
+Where a [test step](/guides/tests) measures reactions to something you put in front of the panel, a poll step measures **what the panel already thinks**.
 
-## When to run a poll
+## When to add a poll step
 
 Reach for a poll when the question stands on its own and you want a fielded readout:
 
@@ -18,11 +18,11 @@ Reach for a poll when the question stands on its own and you want a fielded read
 - **Ratings and sentiment** — a 1–5 read on a policy, price point, or idea.
 - **Open-ended pulse** — verbatims on a topic, clustered into themes.
 
-If you need to compare messages, pre-test creative, or measure lift against a control, run a [test](/guides/tests) instead.
+If you need to compare messages, pre-test creative, or measure lift against a control, add a [test step](/guides/tests) instead.
 
-## Build a poll
+## Configure a poll step
 
-Go to **Polls → New poll** and work down the builder. The live rail on the right previews your panel, arms, and runtime estimate.
+On a simulation's **Model** tab, click **Add node → Poll** and open the node panel.
 
 ### Identity
 
@@ -30,7 +30,7 @@ Name the poll and, optionally, state a **hypothesis** — what you expect the pa
 
 ### Cohort
 
-Pick the [cohort](/guides/cohorts) the poll is fielded to. Every question is answered by the same panel drawn from that cohort, so cross-tabs are consistent across questions.
+Wire the poll to a **Cohort** node on the canvas. Every question is answered by the same panel drawn from that cohort, so cross-tabs are consistent across questions. See [Build a cohort](/guides/cohorts).
 
 ### Context
 
@@ -40,7 +40,7 @@ Set the real-world environment the panel is answering within:
 - **Neutral** — strip context out for a clean baseline.
 - **Custom** — specify the issues, mood, events, and competitive pressure yourself.
 
-Context is saved with the poll so the run can be reconstructed and validated later.
+You can also wire a **News** node for article context. Context is saved with the poll so the run can be reconstructed and validated later.
 
 ### Questions
 
@@ -62,7 +62,7 @@ Every persona answers all questions in a single pass. There is no stimulus, no v
 
 ## Run it
 
-Click **Run poll**. Simulant fields the questions across the panel and streams progress as personas answer; you can also **Save draft** to come back later.
+Click **Run simulation** in the simulation header. Simulant fields the questions across the panel and streams progress as personas answer.
 
 <Note>
   Runtime scales with sample size and question count. Larger panels take longer but tighten the margin of error on each reported share.
@@ -70,7 +70,7 @@ Click **Run poll**. Simulant fields the questions across the panel and streams p
 
 ## Read the results
 
-Open a finished poll to see, per question:
+Open the simulation's **Results** tab, select a run, and click the poll step. Per question you'll see:
 
 - **Weighted shares** — each option's percentage, with `n` responded and the leading share highlighted.
 - **Rating distribution** — for 1–5 questions, the weighted mean with the full distribution.
@@ -88,15 +88,15 @@ The right rail shows run metadata — panel size, cohort, completion rate, effec
 
 Poll results are stored per question so a real-world outcome — an election result, a published poll, an observed conversion rate — can be attached to the run later. That turns a fielded poll into a **predicted-versus-actual** check you can point to when defending the method.
 
-Attach outcomes from the poll's detail page once real-world numbers are available.
+Attach outcomes from the poll step's detail view once real-world numbers are available.
 
 ## Next
 
 <CardGroup cols={2}>
-  <Card title="Run a test" icon="flask" href="/guides/tests">
+  <Card title="Add a test step" icon="flask" href="/guides/tests">
     Compare variants and measure reaction to a creative.
   </Card>
-  <Card title="Run a focus group" icon="messages-square" href="/guides/focus-groups">
+  <Card title="Add a focus group step" icon="messages-square" href="/guides/focus-groups">
     Hear the same cohort deliberate in conversation.
   </Card>
 </CardGroup>

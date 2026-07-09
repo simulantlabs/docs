@@ -1,0 +1,94 @@
+---
+title: "Simulations"
+description: "Create a simulation, compose polls, tests, and focus groups on the model canvas, and read results from a single hub."
+keywords: ["simulation", "workflow", "model canvas", "steps", "runs"]
+---
+
+A **simulation** is the container for your research. Instead of separate lists for tests, polls, and focus groups, you create one simulation, add **steps** on the **Model** canvas, and run the whole flow. Results live under the same simulation — every run, every step, in one place.
+
+<Frame caption="The Simulations hub — every study in the workspace with its step mix, status, and linked datasets.">
+  <img src="/images/app/dashboard.png" alt="Simulations list showing polls, tests, and focus groups as steps within each simulation" />
+</Frame>
+
+## Create a simulation
+
+Go to **Simulations → New simulation**. Simulant creates a draft and opens the simulation detail page with three tabs:
+
+| Tab | What it shows |
+|-----|----------------|
+| **Model** | The visual canvas where you compose steps and wire them together |
+| **Results** | Every run of this simulation, with per-step readouts |
+| **Graph** | A 3D view of results across poll and test steps |
+
+Name the simulation inline at the top of the page. The list view shows how many polls, tests, and focus groups each simulation contains — for example, `3 polls · 1 test · 2 focus groups`.
+
+## Build on the Model canvas
+
+Open the **Model** tab to compose your study. Click **Add node** to place steps on the canvas:
+
+**Research steps**
+- **Poll** — field a short questionnaire to the panel
+- **Test** — measure reactions to creative or messaging
+- **Focus group** — convene a small room to deliberate
+
+**Library nodes**
+- **Cohort** — the audience a step runs against
+- **Dataset** — grounding data the cohort draws from
+- **Asset** — video, image, or copy a test or focus group reacts to
+
+**Intelligence nodes**
+- **Agent** — query your workspace in plain language
+- **Knowledge** — specific facts respondents should know
+- **News** — current articles as run context
+
+**Logic nodes**
+- **Trigger**, **Filter**, **Weighting**, **If/else**, **Action** — control when and how steps execute
+
+Connect nodes by dragging from one port to another. A poll step expects **Respondents** (from a cohort) and optional **Context**; a test step adds **Asset** connections for each variant.
+
+<Frame caption="The Model canvas — compose polls, tests, and focus groups as connected nodes before you run.">
+  <img src="/images/app/test-builder.png" alt="Simulation model canvas with poll, test, and focus group nodes wired to a cohort" />
+</Frame>
+
+<Tip>
+  Start simple: one cohort node, one poll or test node, and a single connection. Add complexity — extra polls, variant tests, focus groups — once the first run looks right.
+</Tip>
+
+## Run a simulation
+
+When the model is ready, click **Run simulation** in the header. Simulant executes the wired steps in order and streams progress. Running simulations show **Running — N%** in the list; finished ones show **Done**.
+
+<Note>
+  Run time scales with panel size, number of steps, variants, and questions. The estimate on each step node helps you right-size a run before committing credits.
+</Note>
+
+## Read results
+
+Open a simulation and switch to the **Results** tab. Each row is a **run** — a point-in-time execution of the model. Click a run to see every step's readout:
+
+- **Poll steps** — weighted shares, margins, segment cuts, and verbatims
+- **Test steps** — headline metrics, lift vs control, sentiment by segment, themes, and recommendations
+- **Focus group steps** — the moderated transcript, participant shifts, and summary
+
+<Frame caption="Step results — poll toplines, test metrics, and focus group transcripts under one simulation.">
+  <img src="/images/app/test-results.png" alt="Simulation run results showing weighted poll shares and segment breakdowns" />
+</Frame>
+
+Use **Share** or **Export** on individual step results to bring others in. The **Graph** tab visualises how results relate across steps when a run includes poll or test nodes.
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="Add a poll step" icon="square-check" href="/guides/polls">
+    Field a questionnaire without creative or variants.
+  </Card>
+  <Card title="Add a test step" icon="flask" href="/guides/tests">
+    Compare variants and measure lift against a control.
+  </Card>
+  <Card title="Add a focus group step" icon="messages-square" href="/guides/focus-groups">
+    Hear a small room deliberate in conversation.
+  </Card>
+  <Card title="Build a cohort" icon="users" href="/guides/cohorts">
+    Define the audience your steps run against.
+  </Card>
+</CardGroup>
