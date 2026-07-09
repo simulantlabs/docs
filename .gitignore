@@ -3,6 +3,7 @@ node_modules/
 
 # Local screenshot tooling (may contain auth tokens)
 scripts/.auth-state.json
+scripts/.auth-session.json
 scripts/.chrome-docs-profile/
 scripts/_warmup.png
 
