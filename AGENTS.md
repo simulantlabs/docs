@@ -14,12 +14,17 @@
 
 ## Terminology
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+- Prefer **synthetic research** / **inference layer on observed human evidence** over "AI personas" or "roleplay"
+- **Distributions are deterministic, individuals are generative** — composition is fixed before any LLM runs
+- **Representativeness is not validity** — composition and response behaviour are separate
+- Report **simulation precision** (±pp from effective sample size), never as survey "accuracy" or conventional MoE alone
+- Audience modes: **respondent-backed** (anchored to microdata) vs **generated** (inside fixed distributions) — always disclose which
+- Use **workspace** not "project"; **member** not "user"; **asset** not "creative" in UI copy (route may still be `/creatives`)
+- White papers (authoritative methodology):
+  - https://simulant.tech/blog/generating-synthetic-respondents/
+  - https://simulant.tech/blog/synthetic-research-methodology/
 
 ## Style preferences
-
-{/* Add any project-specific style rules below */}
 
 - Use active voice and second person ("you")
 - Keep sentences concise — one idea per sentence
@@ -29,5 +34,6 @@
 
 ## Content boundaries
 
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Don't document internal admin features (hidden with `?docs=1` in screenshots)
+- Don't present synthetic panels as a substitute for probability-sample polling where a high-stakes decision turns on a level
+- Don't collapse composition quality, response validity, and simulation uncertainty into one "accuracy" score
